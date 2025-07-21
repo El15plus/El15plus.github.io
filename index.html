@@ -1,0 +1,2996 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Black Tattoo | Tatuajes & Piercings</title>
+    <style>
+        /* 
+            Reset y estilos base para toda la página.
+            Se eliminan márgenes y paddings por defecto y se define la fuente global.
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: #111;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* 
+            Header fijo en la parte superior con logo, navegación y carrito.
+        */
+        header {
+            background-color: #111;
+            color: #fff;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #111;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            font-weight: 300;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #111;
+        }
+
+        .cart-icon {
+            font-size: 1.2rem;
+            margin-left: 2rem;
+            cursor: pointer;
+        }
+
+        /* 
+            Hero Section: imagen de fondo y mensaje principal.
+        */
+        .hero {
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1605649487212-47bdab064df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #111;
+            background-blend-mode: luminosity;
+            background-color: #fff;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            background-color: rgba(255,255,255,0.85);
+            color: #111;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            color: #111;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: #111;
+            color: #fff;
+            border: none;
+            border-radius: 0;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #333;
+        }
+
+        /* 
+            Estilos generales para secciones y títulos.
+        */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            color: #111;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #111;
+            margin: 1rem auto 0;
+        }
+        
+        .section-description {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        /* 
+            Productos: grid de productos, tarjetas y carrusel de imágenes.
+        */
+        .products {
+            background-color: #fff;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            border: 1px solid #111;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 0;
+        }
+
+        /* Carrusel de imágenes dentro de cada producto */
+        .product-carousel {
+            display: flex;
+            transition: transform 0.4s;
+            height: 100%;
+        }
+        .product-carousel img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            flex-shrink: 0;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+        .carousel-arrow-product {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #111a;
+            color: #fff;
+            border: none;
+            border-radius: 0;
+            width: 32px;
+            height: 32px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 2;
+            opacity: 0.85;
+            transition: opacity 0.2s, background 0.2s;
+        }
+        .carousel-arrow-product.left { left: 8px; }
+        .carousel-arrow-product.right { right: 8px; }
+        .carousel-arrow-product:hover { opacity: 1; background: #111; }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            color: #111;
+        }
+
+        .product-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            color: #111;
+        }
+
+        /* 
+            Sección de tatuadores - Carrusel de artistas
+        */
+        .artists-section {
+            background-color: #f8f8f8;
+            padding: 5rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .artists-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .artists-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            color: #111;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .artists-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: #111;
+            margin: 0.5rem auto 0;
+        }
+        
+        /* Estilos del carrusel de artistas */
+        .artists-carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+        
+        .artists-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+        
+        .artist-card {
+            min-width: 300px;
+            margin: 0 15px;
+            background: #fff;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .artist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #111;
+        }
+        
+        .artist-image-container {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .artist-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .artist-card:hover .artist-image {
+            transform: scale(1.05);
+        }
+        
+        .artist-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 1.5rem;
+            color: #fff;
+        }
+        
+        .artist-name {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .artist-specialty {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+        
+        .artist-info {
+            padding: 1.5rem;
+        }
+        
+        .artist-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .artist-exp {
+            font-style: italic;
+        }
+        
+        .artist-social {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f1f1;
+            color: #111;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: #111;
+            color: #fff;
+        }
+        
+        .view-gallery-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: #111;
+            color: #fff;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .view-gallery-btn:hover {
+            background: #333;
+        }
+        
+        /* Flechas del carrusel */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.8);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .carousel-arrow:hover {
+            background: #111;
+            color: #fff;
+        }
+        
+        .carousel-arrow.left {
+            left: 10px;
+        }
+        
+        .carousel-arrow.right {
+            right: 10px;
+        }
+        
+        /* Indicadores del carrusel */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            gap: 0.5rem;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .carousel-indicator.active {
+            background: #111;
+        }
+        
+        /* Estilos para la galería de artistas */
+        .artist-gallery {
+            display: none;
+            padding: 4rem 2rem;
+            background: #fff;
+        }
+        
+        .artist-gallery.active {
+            display: block;
+        }
+        
+        .artist-gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .artist-gallery-title {
+            font-size: 2rem;
+            color: #111;
+            position: relative;
+        }
+        
+        .artist-gallery-title:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: #111;
+            margin-top: 0.5rem;
+        }
+        
+        .back-to-artists {
+            background: #111;
+            color: #fff;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .back-to-artists:hover {
+            background: #333;
+        }
+        
+        .artist-tattoos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .artist-tattoo-item {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+        
+        .artist-tattoo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .artist-tattoo-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .artist-tattoo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .artist-tattoo-item:hover .artist-tattoo-caption {
+            transform: translateY(0);
+        }
+        
+        /* GALERÍA MEJORADA */
+        .gallery-section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: #f8f8f8;
+        }
+        
+        /* Filtros de galería */
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: transparent;
+            border: 2px solid #111;
+            color: #111;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 30px;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: #111;
+            color: #fff;
+        }
+        
+        /* Grid de galería */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            aspect-ratio: 1 / 1;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 1.5rem;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .tattoo-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .tattoo-artist {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .tattoo-style {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Modal de galería */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .modal-img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+        }
+        
+        .modal-caption {
+            color: #fff;
+            text-align: center;
+            margin-top: 1.5rem;
+            max-width: 600px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-artist {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        .modal-style {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.5rem;
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: transform 0.3s;
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .modal-nav:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .modal-prev {
+            left: 20px;
+        }
+        
+        .modal-next {
+            right: 20px;
+        }
+        
+        /* 
+            Sección de contacto: información de contacto y formulario.
+        */
+        .contact {
+            background-color: #fff;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: #111;
+        }
+
+        .contact-info p {
+            margin-bottom: 2rem;
+            color: #444;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #111;
+            background: #fff;
+            color: #111;
+            border-radius: 0;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #888;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+        }
+
+        /* 
+            Footer: información adicional y enlaces.
+        */
+        footer {
+            background-color: #111;
+            color: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            color: #111;
+            background: #fff;
+            display: inline-block;
+            padding: 0 0.5em;
+            border-radius: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: #111;
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+        }
+
+        /* 
+            Carrito de compras: overlay y panel lateral.
+        */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: none;
+            justify-content: flex-end;
+        }
+
+        .cart {
+            width: 400px;
+            height: 100%;
+            background-color: #fff;
+            color: #111;
+            padding: 2rem;
+            overflow-y: auto;
+            border-radius: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-header h3 {
+            color: #111;
+        }
+
+        .close-cart {
+            font-size: 1.5rem;
+            cursor: pointer;
+            tabindex="0" aria-label="Cerrar carrito"
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            margin-right: 1rem;
+        }
+
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-info h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            color: #111;
+            font-weight: bold;
+        }
+
+        .remove-item {
+            color: #999;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .cart-total {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            margin-top: 1rem;
+            background: #111;
+            color: #fff;
+            border-radius: 0;
+        }
+
+        .checkout-btn:hover {
+            background: #333;
+        }
+
+        /* 
+            Responsive: ajustes para pantallas pequeñas.
+        */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cart {
+                width: 100%;
+            }
+            
+            /* Ajustes del carrusel de artistas */
+            .artist-card {
+                min-width: 250px;
+            }
+            
+            .carousel-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            /* Galería responsive */
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .modal-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .modal-caption {
+                font-size: 0.9rem;
+            }
+            
+            .modal-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-image {
+                height: 200px;
+            }
+            
+            .product-carousel img {
+                height: 200px;
+            }
+            
+            .hero-content {
+                padding: 1rem;
+            }
+            
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0.7rem 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            
+            .cart-icon {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            /* Ajustes del carrusel de artistas */
+            .artist-card {
+                min-width: 220px;
+            }
+            
+            /* Galería mobile */
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-filters {
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        /* 
+            Página de carga
+        */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #111;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        #preloader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #preloader .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #fff;
+            border-top: 6px solid #444;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Botón flotante de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            background: transparent;
+            transition: box-shadow 0.2s;
+        }
+        .whatsapp-float:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+            background: rgba(37,211,102,0.12);
+        }
+        .whatsapp-float svg {
+            display: block;
+        }
+        @media (max-width: 600px) {
+            .whatsapp-float {
+                right: 12px;
+                bottom: 12px;
+                width: 48px;
+                height: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header: logo, navegación y carrito -->
+    <header>
+        <div class="logo" style="display:flex;align-items:center;gap:1rem;">
+            <!-- Espacio para el logo -->
+            <img src="images/logo.png" alt="NEW BLACK TATTOO Logo" style="height:54px;object-fit:contain;">
+            <span style="color:#fff;">NEW BLACK TATTOO</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#products">Productos</a></li>
+                <li><a href="#artists">Tatuadores</a></li>
+                <li><a href="#gallery">Galería</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon">🛒 <span class="cart-count">0</span></div>
+    </header>
+
+    <!-- Hero Section: mensaje principal y llamada a la acción -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>ARTE EN TU PIEL</h1>
+            <p>Descubre nuestro estudio de tatuajes y nuestra colección exclusiva de productos para el cuidado de tus tatuajes.</p>
+            <a href="#products" class="btn">Explorar Productos</a>
+        </div>
+    </section>
+
+    <!-- Sección de Tatuadores (versión inicial, sin carrusel JS complejo) -->
+    <section class="artists-section" id="artists">
+        <div class="artists-container">
+            <h2 class="artists-title">NUESTROS TATUADORES</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem; color: #555;">
+                Conoce a nuestro talentoso equipo de artistas, cada uno especializado en diferentes estilos para crear la pieza perfecta para ti.
+            </p>
+            <div class="artists-track" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+                <div class="artist-card">
+                    <div class="artist-image-container">
+                        <img class="artist-image" src="images/Alejandra_tatuadora.jpg" alt="Alejandra Gonzales">
+                        <div class="artist-overlay">
+                            <div class="artist-name">Alejandra Gonzales</div>
+                            <div class="artist-specialty">Minimalista • Piercing</div>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-stats">
+                            <span class="artist-exp">10 años de experiencia</span>
+                        </div>
+                        <p>Tatuadora minimalista y body piercer profesional</p>
+                        <div class="artist-social">
+                            <a href="https://www.instagram.com/newblack_tattoo_?igsh=MW10N2FweHY4c3YweQ==" target="_blank" class="social-icon" title="Instagram">📷</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-image-container">
+                        <img class="artist-image" src="images/Daniela_vallejo_tatatuadora.webp" alt="Daniela Vallejo">
+                        <div class="artist-overlay">
+                            <div class="artist-name">Daniela Vallejo</div>
+                            <div class="artist-specialty">Anime • Color</div>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-stats">
+                            <span class="artist-exp">8 años de experiencia</span>
+                        </div>
+                        <p>Especialista en diseños de anime y color</p>
+                        <div class="artist-social">
+                            <a href="https://www.instagram.com/vallejo.tattoo_?igsh=a3FxMmlsYWJ1ZHNl" target="_blank" class="social-icon" title="Instagram">📷</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-image-container">
+                        <img class="artist-image" src="images/Mateo_Rubio_tatuador.jpg" alt="Mateo Rubio">
+                        <div class="artist-overlay">
+                            <div class="artist-name">Mateo Rubio</div>
+                            <div class="artist-specialty">Neotribal • Old School • Neo Tradicional</div>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-stats">
+                            <span class="artist-exp">12 años de experiencia</span>
+                        </div>
+                        <p>Especialista en Neotribal y blackwork</p>
+                        <div class="artist-social">
+                            <a href="#" class="social-icon" title="Instagram">📷</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-image-container">
+                        <img class="artist-image" src="images/Leo_Serna_tatuador.webp" alt="Leo Serna">
+                        <div class="artist-overlay">
+                            <div class="artist-name">Leo Serna</div>
+                            <div class="artist-specialty">Geométrico • Dotwork • Mandalas</div>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-stats">
+                            <span class="artist-exp">6 años de experiencia</span>
+                        </div>
+                        <p>Especialista en geométrico y dotwork</p>
+                        <div class="artist-social">
+                            <a href="#" class="social-icon" title="Instagram">📷</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="artist-card">
+                    <div class="artist-image-container">
+                        <img class="artist-image" src="images/Fabian_Alvarez_Tatuador.jpg" alt="Fabian Alvarez">
+                        <div class="artist-overlay">
+                            <div class="artist-name">Fabian Alvarez</div>
+                            <div class="artist-specialty">Tradicional • Old School • Neo Tradicional</div>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-stats">
+                            <span class="artist-exp">12 años de experiencia</span>
+                        </div>
+                        <p>Especialista en tradicional y old school</p>
+                        <div class="artist-social">
+                            <a href="#" class="social-icon" title="Instagram">📷</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos: ahora divididos en categorías -->
+    <section class="products" id="products">
+        <h2 class="section-title">NUESTROS PRODUCTOS</h2>
+        
+        <!-- Barra de búsqueda y filtros por categoría -->
+        <div style="text-align:center; margin-bottom:2rem;">
+            <input 
+                type="text" 
+                id="product-search" 
+                placeholder="Buscar productos..." 
+                style="padding:0.7rem 1rem; width:90%; max-width:400px; border:1px solid #ccc; border-radius:6px; font-size:1rem;"
+            />
+            
+            <!-- Filtros por categoría -->
+            <div class="product-categories" style="margin-top:1rem; display:flex; justify-content:center; gap:1rem; flex-wrap:nowrap; align-items:center;">
+                <button class="category-filter active view-gallery-btn" data-category="all" style="flex:1 1 0; max-width:200px;">Todos</button>
+                <button class="category-filter view-gallery-btn" data-category="tattoo" style="flex:1 1 0; max-width:200px;">Insumos Tatuadores</button>
+                <button class="category-filter view-gallery-btn" data-category="piercing" style="flex:1 1 0; max-width:200px;">Piercings y Cuidado</button>
+            </div>
+            <!-- Filtros de orden -->
+            <div style="margin-top:1.5rem; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; align-items:center;">
+                <label for="sort-price" style="font-weight:600;">Ordenar por precio:</label>
+                <select id="sort-price" style="padding:0.5rem 1rem; border-radius:6px; border:1px solid #ccc;">
+                    <option value="none">Sin ordenar</option>
+                    <option value="asc">Menor a mayor</option>
+                    <option value="desc">Mayor a menor</option>
+                </select>
+                <label for="sort-other" style="font-weight:600;">Ordenar por:</label>
+                <select id="sort-other" style="padding:0.5rem 1rem; border-radius:6px; border:1px solid #ccc;">
+                    <option value="relevance">Relevancia</option>
+                    <option value="recent">Más recientes</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Todos los productos en una sola sección -->
+        <div class="product-category-section" id="all-products">
+            <div class="products-grid" id="products-grid-all">
+                <!-- Producto 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="1">&#10094;</button>
+                        <div class="product-carousel" data-product="1">
+                            <img src="productos/producto%201.jpg" alt="Ultra Ink Tattoo Care" data-link="productos/producto1.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="1">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ultra Ink Tattoo Care</h3>
+                        <p>Crema hidratante protectora con filtro UV, Aloe Vera, 12 nutrióleos, libre de parabenos y con pantenol 0.5%. Ideal para el cuidado diario del tatuaje.</p>
+                        <p class="price">$22000</p>
+                        <button class="btn add-to-cart" data-id="1" data-name="Ultra Ink Tattoo Care" data-price="22000" data-image="productos/producto%201.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="2">&#10094;</button>
+                        <div class="product-carousel" data-product="2">
+                            <img src="productos/producto%202.jpg" alt="Cartuchos WLX 20 piezas" data-link="productos/producto2.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="2">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cartuchos WLX (20 piezas)</h3>
+                        <p>Agujas en cartucho WLX de alta precisión para tatuaje. Sistema de membrana para mayor seguridad. Compatible con la mayoría de máquinas rotativas.</p>
+                        <p class="price">$65000</p>
+                        <button class="btn add-to-cart" data-id="2" data-name="Cartuchos WLX (20 piezas)" data-price="65000" data-image="productos/producto%202.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="3">&#10094;</button>
+                        <div class="product-carousel" data-product="3">
+                            <img src="productos/producto%203.jpg" alt="Cartuchos Drop System Hi Tattoo" data-link="productos/producto3.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="3">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cartuchos Drop System (Hi Tattoo)</h3>
+                        <p>Cartuchos profesionales Hi Tattoo Drop System. Diseño ergonómico, membrana de seguridad y alta precisión. Perfectos para líneas, sombras y rellenos.</p>
+                        <p class="price">$70000</p>
+                        <button class="btn add-to-cart" data-id="3" data-name="Cartuchos Drop System (Hi Tattoo)" data-price="70000" data-image="productos/producto%203.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="4">&#10094;</button>
+                        <div class="product-carousel" data-product="4">
+                            <img src="productos/producto%204.jpg" alt="Cartuchos WLX Ultimate 20 pcs" data-link="productos/producto4.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="4">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cartuchos WLX Ultimate (20 piezas)</h3>
+                        <p>Cartuchos WLX Ultimate de alto rendimiento. Sistema avanzado de membrana, flujo constante y máxima precisión para trabajos detallados.</p>
+                        <p class="price">$75000</p>
+                        <button class="btn add-to-cart" data-id="4" data-name="Cartuchos WLX Ultimate (20 piezas)" data-price="75000" data-image="productos/producto%204.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="5">&#10094;</button>
+                        <div class="product-carousel" data-product="5">
+                            <img src="productos/producto%205.jpg" alt="Tinta Dynamic Black 8oz" data-link="productos/producto5.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="5">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Tinta Dynamic Black (8 oz)</h3>
+                        <p>Tinta negra premium para tatuajes. Dynamic Color Co. – fórmula clásica, alta pigmentación, fluidez excelente. Hecha en EE.UU. Ideal para líneas y relleno.</p>
+                        <p class="price">$120000</p>
+                        <button class="btn add-to-cart" data-id="5" data-name="Tinta Dynamic Black (8 oz)" data-price="120000" data-image="productos/producto%205.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="6">&#10094;</button>
+                        <div class="product-carousel" data-product="6">
+                            <img src="productos/producto%206.jpg" alt="Tinta Dynamic Black 1oz" data-link="productos/producto6.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="6">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Tinta Dynamic Black (1 oz)</h3>
+                        <p>Presentación compacta de tinta Dynamic BLK. Alta concentración de pigmento, fluido constante y resultados profesionales. Hecha en EE.UU.</p>
+                        <p class="price">$25000</p>
+                        <button class="btn add-to-cart" data-id="6" data-name="Tinta Dynamic Black (1 oz)" data-price="25000" data-image="productos/producto%206.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="7">&#10094;</button>
+                        <div class="product-carousel" data-product="7">
+                            <img src="productos/producto%207.jpg" alt="Tinta Dynamic Triple Black 1oz" data-link="productos/producto7.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="7">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Tinta Dynamic Triple Black (1 oz)</h3>
+                        <p>Tinta TBK (Triple Black) de Dynamic Color Co. Más densa e intensa que la BLK. Ideal para rellenos sólidos y negros profundos. Hecha en EE.UU.</p>
+                        <p class="price">$27000</p>
+                        <button class="btn add-to-cart" data-id="7" data-name="Tinta Dynamic Triple Black (1 oz)" data-price="27000" data-image="productos/producto%207.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 8 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="8">&#10094;</button>
+                        <div class="product-carousel" data-product="8">
+                            <img src="productos/producto%208.jpg" alt="Tinta Dynamic Triple Black 8oz" data-link="productos/producto8.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="8">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Tinta Dynamic Triple Black (8 oz)</h3>
+                        <p>Dynamic TBK (Triple Black) en su presentación de 240 ml. Pigmento supercargado para negros sólidos y profundos. Fabricada en EE.UU. Ideal para artistas exigentes.</p>
+                        <p class="price">$125000</p>
+                        <button class="btn add-to-cart" data-id="8" data-name="Tinta Dynamic Triple Black (8 oz)" data-price="125000" data-image="productos/producto%208.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 9 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="9">&#10094;</button>
+                        <div class="product-carousel" data-product="9">
+                            <img src="productos/producto%209.jpg" alt="Crema Ultra Ink Tattoo Care" data-link="productos/producto9.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="9">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Crema Ultra Ink Tattoo Care (120 ml)</h3>
+                        <p>Crema hidratante protectora para tatuajes. Contiene filtro UV, aloe vera, 12 nutri-óleos y pantenol 0.5%. Libre de parabenos. Ideal para la recuperación y brillo del tatuaje.</p>
+                        <p class="price">$20000</p>
+                        <button class="btn add-to-cart" data-id="9" data-name="Crema Ultra Ink Tattoo Care (120 ml)" data-price="20000" data-image="productos/producto%209.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 10 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="10">&#10094;</button>
+                        <div class="product-carousel" data-product="10">
+                            <img src="productos/producto%2010.jpg" alt="Gel Stencil Protón" data-link="productos/producto10.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="10">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Gel Stencil Protón (120 ml)</h3>
+                        <p>Gel profesional para la aplicación de stencil. Mejora la transferencia de imagen, prepara los poros y brinda mayor duración. Ideal para trabajos precisos y duraderos en tatuaje.</p>
+                        <p class="price">$25000</p>
+                        <button class="btn add-to-cart" data-id="10" data-name="Gel Stencil Protón (120 ml)" data-price="25000" data-image="productos/producto%2010.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 11 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="11">&#10094;</button>
+                        <div class="product-carousel" data-product="11">
+                            <img src="productos/producto%2011.jpg" alt="Crema Hidratante Ultra Ink 30 ml" data-link="productos/producto11.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="11">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Crema Hidratante Ultra Ink (30 ml)</h3>
+                        <p>Protege y cuida tu tatuaje con esta crema hidratante con filtro UV, aloe vera, 12 nutri-oleos y pantenol. Libre de parabenos, ideal para piel recién tatuada.</p>
+                        <p class="price">$12000</p>
+                        <button class="btn add-to-cart" data-id="11" data-name="Crema Hidratante Ultra Ink (30 ml)" data-price="12000" data-image="productos/producto%2011.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 12 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="12">&#10094;</button>
+                        <div class="product-carousel" data-product="12">
+                            <img src="productos/producto%2012.jpg" alt="Tinta Brite White Starburst Colors" data-link="productos/producto12.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="12">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Brite White Starburst Colors</h3>
+                        <p>Tinta blanca de alta calidad para tatuajes. Pigmento puro sin cortar, ideal para resaltar detalles y lograr contrastes nítidos.</p>
+                        <p class="price">$25000</p>
+                        <button class="btn add-to-cart" data-id="12" data-name="Brite White Starburst Colors" data-price="25000" data-image="productos/producto%2012.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 13 -->
+                <div class="product-card" data-category="tattoo">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="13">&#10094;</button>
+                        <div class="product-carousel" data-product="13">
+                            <img src="productos/producto%2013.jpg" alt="Gel Stencil Protón Profesional Azul" data-link="productos/producto13.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="13">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Protón Gel Stencil Profesional (Azul)</h3>
+                        <p>Gel fijador de stencil de alta duración. Facilita una mejor transferencia de la imagen, preparación de los poros y mayor durabilidad del diseño.</p>
+                        <p class="price">$30000</p>
+                        <button class="btn add-to-cart" data-id="13" data-name="Protón Gel Stencil Profesional Azul" data-price="30000" data-image="productos/producto%2013.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 14 -->
+                <div class="product-card" data-category="tattoo">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="14">&#10094;</button>
+                        <div class="product-carousel" data-product="14">
+                            <img src="productos/producto%2014.jpg" alt="Ultra Ink Ultra Butter Black Edition" data-link="productos/producto14.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="14">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ultra Ink Ultra Butter Black Edition</h3>
+                        <p>Pomada vegana con sangre de dragón. Fórmula profesional para el cuidado del tatuaje durante y después del procedimiento. 150 ml.</p>
+                        <p class="price">$50000</p>
+                        <button class="btn add-to-cart" data-id="14" data-name="Ultra Ink Ultra Butter Black Edition" data-price="50000" data-image="productos/producto%2014.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 15 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="15">&#10094;</button>
+                        <div class="product-carousel" data-product="15">
+                            <img src="productos/producto%2015.jpg" alt="Reborn Tattoo Pomada" data-link="productos/producto15.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="15">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Reborn Tattoo Pomada</h3>
+                        <p>Pomada vegana profesional para el cuidado del tatuaje. Fórmula especial con ingredientes naturales para proteger y regenerar la piel. 150 ml.</p>
+                        <p class="price">$50000</p>
+                        <button class="btn add-to-cart" data-id="15" data-name="Reborn Tattoo Pomada" data-price="50000" data-image="productos/producto%2015.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 16 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="16">&#10094;</button>
+                        <div class="product-carousel" data-product="16">
+                            <img src="productos/producto%2016.jpg" alt="Royal Three Orange Soap" data-link="productos/producto16.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="16">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Royal Three Orange Soap</h3>
+                        <p>Jabón antibacterial neutro para uso profesional en tatuajes. Ideal para limpieza durante y después del procedimiento. Contenido neto: 350 ml.</p>
+                        <p class="price">$35000</p>
+                        <button class="btn add-to-cart" data-id="16" data-name="Royal Three Orange Soap" data-price="35000" data-image="productos/producto%2016.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 17 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="17">&#10094;</button>
+                        <div class="product-carousel" data-product="17">
+                            <img src="productos/producto%2017.jpg" alt="TKTX Numb Crema Anestésica" data-link="productos/producto17.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="17">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>TKTX Numb Crema Anestésica</h3>
+                        <p>Crema anestésica de máxima potencia para tatuajes. Efecto de 6 a 8 horas. Alivia el dolor durante procedimientos prolongados. Contenido: 10 g.</p>
+                        <p class="price">$40000</p>
+                        <button class="btn add-to-cart" data-id="17" data-name="TKTX Numb Crema Anestésica" data-price="40000" data-image="productos/producto%2017.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 18 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="18">&#10094;</button>
+                        <div class="product-carousel" data-product="18">
+                            <img src="productos/producto%2018.jpg" alt="Ultra Tattoo Wash Black Edition" data-link="productos/producto18.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="18">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ultra Tattoo Wash Black Edition</h3>
+                        <p>Jabón espumoso profesional para tatuajes. Limpieza efectiva y suave durante y después del procedimiento. Contenido: 220 ml.</p>
+                        <p class="price">$30000</p>
+                        <button class="btn add-to-cart" data-id="18" data-name="Ultra Tattoo Wash Black Edition" data-price="30000" data-image="productos/producto%2018.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 19 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="19">&#10094;</button>
+                        <div class="product-carousel" data-product="19">
+                            <img src="productos/producto%2019.jpg" alt="RCK Loción Tónica Corporal" data-link="productos/producto19.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="19">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>RCK Loción Tónica Corporal</h3>
+                        <p>Loción profesional para tatuadores. Limpia, refresca y acondiciona la piel durante el proceso. Presentación de 125 cc (4.23 fl oz).</p>
+                        <p class="price">$25000</p>
+                        <button class="btn add-to-cart" data-id="19" data-name="RCK Loción Tónica Corporal" data-price="25000" data-image="productos/producto%2019.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 20 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="20">&#10094;</button>
+                        <div class="product-carousel" data-product="20">
+                            <img src="productos/producto%2020.jpg" alt="Snow Hydra Aloe" data-link="productos/producto20.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="20">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Snow Hydra Aloe</h3>
+                        <p>Loción hidratante con aloe vera ideal para el cuidado y regeneración de la piel tatuada. Suaviza, refresca y protege. Contenido: 400 ml.</p>
+                        <p class="price">$28000</p>
+                        <button class="btn add-to-cart" data-id="20" data-name="Snow Hydra Aloe" data-price="28000" data-image="productos/producto%2020.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 21 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="21">&#10094;</button>
+                        <div class="product-carousel" data-product="21">
+                            <img src="productos/producto%2021.jpg" alt="Solid Rock 180 gr" data-link="productos/producto21.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="21">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Solid Rock 180 gr</h3>
+                        <p>Producto ideal para el cuidado posterior del tatuaje. Fórmula sólida y efectiva para regenerar y proteger la piel. Contenido: 180 gramos.</p>
+                        <p class="price">$22000</p>
+                        <button class="btn add-to-cart" data-id="21" data-name="Solid Rock 180 gr" data-price="22000" data-image="productos/producto%2021.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 22 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="22">&#10094;</button>
+                        <div class="product-carousel" data-product="22">
+                            <img src="productos/producto%2022.jpg" alt="Venda Cohesiva Negra x2" data-link="productos/producto22.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="22">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Venda Cohesiva Negra x2</h3>
+                        <p>Set de 2 vendas cohesivas color negro. Ideal para cubrir grips y mantener la higiene durante la sesión de tatuaje. Auto adherente, no necesita cinta. 5 cm de ancho por 4.5 m de largo cada una.</p>
+                        <p class="price">$10000</p>
+                        <button class="btn add-to-cart" data-id="22" data-name="Venda Cohesiva Negra x2" data-price="10000" data-image="productos/producto%2022.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+                <!-- Producto 23 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <button class="carousel-arrow-product left" data-product="23">&#10094;</button>
+                        <div class="product-carousel" data-product="23">
+                            <img src="productos/producto%2023.jpg" alt="Protectores Desechables Morados" data-link="productos/producto23.html">
+                        </div>
+                        <button class="carousel-arrow-product right" data-product="23">&#10095;</button>
+                    </div>
+                    <div class="product-info">
+                        <h3>Protectores Desechables Morados x 125</h3>
+                        <p>Protectores absorbentes desechables de color morado. Ideales para mantener el área de trabajo limpia y seca durante procedimientos como tatuajes o micropigmentación. Alta resistencia y absorción. Paquete por 125 unidades.</p>
+                        <p class="price">$28000</p>
+                        <button class="btn add-to-cart" data-id="23" data-name="Protectores Desechables Morados x 125" data-price="28000" data-image="productos/producto%2023.jpg">Añadir al carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Paginación de productos -->
+        <div id="products-pagination" style="text-align:center; margin-top:1.5rem;">
+            <!-- Botones de paginación generados por JS -->
+        </div>
+    </section>
+
+    <!-- Galería de tatuajes (versión inicial, estática) -->
+    <section class="gallery-section" id="gallery">
+        <h2 class="section-title">GALERÍA DE TATUAJES</h2>
+        <p class="section-description">
+            Explora nuestra colección de trabajos realizados por nuestros tatuadores. Cada pieza es única y creada con la máxima dedicación.
+        </p>
+        <div class="gallery-grid" id="gallery-grid">
+            <div class="gallery-item">
+                <img src="images/tatto_Daniela- copia/tattoo1.jpg" alt="Tatuaje 1" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3 class="tattoo-title">Tatuaje destacado</h3>
+                    <p class="tattoo-artist">Por Daniela Vallejo - 2025</p>
+                    <span class="tattoo-style">Color</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/tatto_Daniela- copia/tattoo2.jpg" alt="Tatuaje 2" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3 class="tattoo-title">Minimalista Abstracto</h3>
+                    <p class="tattoo-artist">Por Daniela Vallejo - 2025</p>
+                    <span class="tattoo-style">Color</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/tatto_Daniela- copia/tattoo3.jpg" alt="Tatuaje 3" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3 class="tattoo-title">Geometría Sagrada</h3>
+                    <p class="tattoo-artist">Por Daniela Vallejo - 2025</p>
+                    <span class="tattoo-style">Color</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/tatto_Daniela- copia/tattoo4.jpg" alt="Tatuaje 4" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3 class="tattoo-title">Floral Tradicional</h3>
+                    <p class="tattoo-artist">Por Daniela Vallejo - 2025</p>
+                    <span class="tattoo-style">Color</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/tatto_Daniela- copia/tattoo5.jpg" alt="Tatuaje 5" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3 class="tattoo-title">Blackwork Tribal</h3>
+                    <p class="tattoo-artist">Por Daniela Vallejo - 2025</p>
+                    <span class="tattoo-style">Color</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/tatto_Daniela- copia/tattoo6.jpg" alt="Tatuaje 6" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3 class="tattoo-title">Dotwork Detallado</h3>
+                    <p class="tattoo-artist">Por Daniela Vallejo - 2025</p>
+                    <span class="tattoo-style">Color</span>
+                </div>
+            </div>
+            <!-- ...agrega más imágenes si lo deseas... -->
+        </div>
+    </section>
+    
+    <!-- Modal para ver imágenes en grande -->
+    <div class="gallery-modal" id="gallery-modal">
+        <button class="close-modal" id="close-modal">&times;</button>
+        <div class="modal-content">
+            <img class="modal-img" id="modal-img" src="" alt="">
+            <div class="modal-caption">
+                <h3 class="modal-title" id="modal-title"></h3>
+                <p class="modal-artist" id="modal-artist"></p>
+                <span class="modal-style" id="modal-style"></span>
+            </div>
+        </div>
+        <button class="modal-nav modal-prev" id="modal-prev">&#10094;</button>
+        <button class="modal-nav modal-next" id="modal-next">&#10095;</button>
+    </div>
+
+    <!-- Contacto -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">CONTACTO</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Visítanos</h3>
+                <p>Calle 21 #10-31 centro, Tunja</p>
+                <p>Lunes a Viernes: 10:00 - 20:00</p>
+                <p>Sábados: 11:00 - 18:00</p>
+                <p>Teléfono: +57 321 4583086</p>
+                <p>Email: newbacktattoo@gmail.com</p>
+            </div>
+            <div class="contact-form">
+                <h3>Reserva tu cita</h3>
+                <form id="contact-whatsapp-form">
+                    <input type="text" id="contact-name" placeholder="Nombre" required>
+                    <input type="email" id="contact-email" placeholder="Email" required>
+                    <input type="tel" id="contact-phone" placeholder="Teléfono">
+                    <textarea id="contact-message" placeholder="Describe tu idea de tatuaje"></textarea>
+                    <button type="submit" class="btn">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>NEW BLACK TATTOO</h3>
+                <p>Estudio de tatuajes profesional con los mejores artistas y estándares de calidad.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces</h3>
+                <ul>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#products">Productos</a></li>
+                    <li><a href="#artists">Artistas</a></li>
+                    <li><a href="#gallery">Galería</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Horario</h3>
+                <ul>
+                    <li>Lunes a Viernes: 10:00 - 20:00</li>
+                    <li>Sábados: 11:00 - 18:00</li>
+                    <li>Domingos: Cerrado</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <ul>
+                    <li>Tel: +57 321 4583086</li>
+                    <li>Email: newbacktattoo@gmail.com</li>
+                    <li>Dirección: Calle 21 #10-31 centro, Tunja</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 New Black Tattoo. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Carrito de compras -->
+    <div class="cart-overlay">
+        <div class="cart">
+            <div class="cart-header">
+                <h3>Tu Carrito (<span class="cart-count">0</span>)</h3>
+                <button class="close-cart" tabindex="0" aria-label="Cerrar carrito">&times;</button>
+            </div>
+            <div class="cart-content" id="cart-content">
+                <!-- Los productos se añadirán aquí dinámicamente -->
+            </div>
+            <div class="cart-total">
+                Total: $<span id="cart-total-amount">0.00</span>
+            </div>
+            <button class="btn checkout-btn" id="whatsapp-checkout">Completar pedido por WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/573214583086" target="_blank" class="whatsapp-float" title="Chatea por WhatsApp">
+        <svg width="48" height="48" viewBox="0 ="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="24" fill="#25D366"/>
+            <path d="M34.6 29.2c-.5-.2-2.8-1.4-3.2-1.6-.4-.2-.7-.2-1 .2-.3.4-1.1 1.6-1.4 1.9-.3.3-.5.4-1 .1-.5-.2-2.1-.8-4-2.5-1.5-1.3-2.5-2.9-2.8-3.4-.3-.5 0-.7.2-.9.2-.2.5-.6.7-.9.2-.3.2-.5.3-.8.1-.3 0-.6-.1-.8-.2-.2-1.1-2.7-1.5-3.7-.4-1-.8-.8-1.1-.8-.3 0-.6 0-.9 0-.3 0-.8.1-1.2.6-.4.5-1.6 1.6-1.6 3.8 0 2.2 1.6 4.3 1.8 4.6.2.3 3.2 5 7.8 6.7.9.3 1.6.5 2.1.6.9.2 1.7.2 2.3.1.7-.1 2.2-.9 2.5-1.7.3-.8.3-1.5.2-1.7-.1-.2-.4-.3-.9-.5z" fill="#fff"/>
+        </svg>
+    </a>
+
+    <script>
+        // Carrusel de artistas
+        document.addEventListener('DOMContentLoaded', function() {
+            const artistsTrack = document.getElementById('artists-track');
+            const prevBtn = document.getElementById('artist-prev');
+            const nextBtn = document.getElementById('artist-next');
+            const indicators = document.getElementById('artist-indicators');
+            const artistGallery = document.getElementById('artist-gallery');
+            const artistNameDisplay = document.getElementById('artist-name-display');
+            const artistTattoosGrid = document.getElementById('artist-tattoos-grid');
+            const backToArtistsBtn = document.getElementById('back-to-artists');
+            const artistsSection = document.getElementById('artists');
+
+            // Datos de los artistas (mantén los mismos datos que ya tienes)
+            const artists = [
+                {
+                    name: "Alejandra Gonzales",
+                    desc: "Tatuadora minimalista y body piercer profesional",
+                    exp: "10 años de experiencia",
+                    img: "images/Alejandra_tatuadora.jpg",
+                    specialty: "Minimalista • Piercing",
+                    social: [
+                        { href: "https://www.instagram.com/newblack_tattoo_?igsh=MW10N2FweHY4c3YweQ==", icon: "📷", label: "Instagram" },
+                        { href: "#", icon: "🐦", label: "Twitter" },
+                        { href: "#", icon: "👍", label: "Facebook" }
+                    ],
+                    tattoos: [
+                        { img: "https://images.unsplash.com/photo-1613082442324-62ef5249275e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Minimalista - 2023" },
+                        { img: "https://images.unsplash.com/photo-1613082442235-04c6ca230979?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Floral - 2022" },
+                        { img: "https://images.unsplash.com/photo-1613082442324-62ef5249275e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Geométrico - 2023" },
+                        { img: "https://images.unsplash.com/photo-1613082442324-62ef5249275e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Blackwork - 2021" }
+                    ]
+                },
+                {
+                    name: "Daniela Vallejo",
+                    desc: "Especialista en diseños de anime y color",
+                    exp: "8 años de experiencia",
+                    img: "images/Daniela_vallejo_tatatuadora.webp",
+                    specialty: "Anime • Color",
+                    social: [
+                        { href: "https://www.instagram.com/vallejo.tattoo_?igsh=a3FxMmlsYWJ1ZHNl", icon: "📷", label: "Instagram" },
+                        { href: "#", icon: "🐦", label: "Twitter" },
+                        { href: "#", icon: "👍", label: "Facebook" }
+                    ],
+                    tattoos: [
+                        { img: "images/tatto_Daniela- copia/tattoo1.jpg", caption: "Anime - 2023" },
+                        { img: "images/tatto_Daniela- copia/tattoo2.jpg", caption: "Anime - 2023" },
+                        { img: "images/tatto_Daniela- copia/tattoo3.jpg", caption: "Anime - 2023" },
+                        { img: "images/tatto_Daniela- copia/tattoo4.jpg", caption: "Anime - 2023" }
+                    ]
+                },
+                {
+                    name: "Mateo Rubio",
+                    desc: "Especialista en Neotribal y blackwork",
+                    exp: "12 años de experiencia",
+                    img: "images/Mateo_Rubio_tatuador.jpg",
+                    specialty: "Neotribal • Old School • Neo Tradicional",
+                    social: [
+                        { href: "#", icon: "📷", label: "Instagram" },
+                        { href: "#", icon: "🐦", label: "Twitter" },
+                        { href: "#", icon: "👍", label: "Facebook" }
+                    ],
+                    tattoos: [
+                        { img: "https://images.unsplash.com/photo-1613082442324-62ef5249275e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Tradicional - 2023" },
+                        { img: "https://images.unsplash.com/photo-1613082442235-04c6ca230979?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Old School - 2022" },
+                        { img: "https://images.unsplash.com/photo-1613082442324-62ef5249275e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Neo Tradicional - 2021" },
+                        { img: "https://images.unsplash.com/photo-1613082442324-62ef5249275e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Blackwork - 2020" }
+                    ]
+                },
+                {
+                    name: "Leo Serna",
+                    desc: "Especialista en geométrico y dotwork",
+                    exp: "6 años de experiencia",
+                    img: "images/Leo_Serna_tatuador.webp",
+                    specialty: "Geométrico • Dotwork • Mandalas",
+                    social: [
+                        { href: "#", icon: "📷", label: "Instagram" },
+                        { href: "#", icon: "🐦", label: "Twitter" },
+                        { href: "#", icon: "👍", label: "Facebook" }
+                    ],
+                    tattoos: [
+                        { img: "https://images.unsplash.com/photo-1613082442324-62ef5249275e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Geométrico - 2023" },
+                        { img: "https://images.unsplash.com/photo-1613082442235-04c6ca230979?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Mandala - 2022" },
+                        { img: "https://images.unsplash.com/photo-1613082442324-62ef5249275e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Dotwork - 2021" }
+                    ]
+                },
+                {
+                    name: "Fabian Alvarez",
+                    desc: "Especialista en tradicional y old school",
+                    exp: "12 años de experiencia",
+                    img: "images/Fabian_Alvarez_Tatuador.jpg",
+                    specialty: "Tradicional • Old School • Neo Tradicional",
+                    social: [
+                        { href: "#", icon: "📷", label: "Instagram" },
+                        { href: "#", icon: "🐦", label: "Twitter" },
+                        { href: "#", icon: "👍", label: "Facebook" }
+                    ],
+                    tattoos: [
+                        { img: "https://images.unsplash.com/photo-1613082442324-62ef5249275e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Tradicional - 2023" },
+                        { img: "https://images.unsplash.com/photo-1613082442235-04c6ca230979?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Old School - 2022" },
+                        { img: "https://images.unsplash.com/photo-1613082442324-62ef5249275e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Neo Tradicional - 2021" },
+                        { img: "https://images.unsplash.com/photo-1613082442324-62ef5249275e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", caption: "Blackwork - 2020" },
+                        { img: "images/tatto_fabian/tattoo1_fabian.jpg", caption: "Tatuaje destacado - Fabian" }
+                    ]
+                }
+            ];
+
+            let currentSlide = 0;
+            let cardWidth = 330; // Ancho aproximado de cada tarjeta (300px + margen)
+            let autoSlideInterval;
+            let isTransitioning = false;
+
+            // Clonar los primeros y últimos elementos para efecto infinito
+            function prepareInfiniteEffect() {
+                const cards = artistsTrack.querySelectorAll('.artist-card');
+                if (cards.length > 0) {
+                    const firstClone = cards[0].cloneNode(true);
+                    const lastClone = cards[cards.length - 1].cloneNode(true);
+
+                    artistsTrack.appendChild(firstClone);
+                    artistsTrack.insertBefore(lastClone, cards[0]);
+
+                    // Ajustar la posición inicial para mostrar el primer elemento real
+                    artistsTrack.style.transform = `translateX(-${cardWidth}px)`;
+                }
+            }
+
+            // Renderizar artistas en el carrusel
+            function renderArtists() {
+                artistsTrack.innerHTML = '';
+                indicators.innerHTML = '';
+
+                artists.forEach((artist, index) => {
+                    // Crear tarjeta de artista
+                    const card = document.createElement('div');
+                    card.className = 'artist-card';
+                    card.innerHTML = `
+                        <div class="artist-image-container">
+                            <img class="artist-image" src="${artist.img}" alt="${artist.name}">
+                            <div class="artist-overlay">
+                                <div class="artist-name">${artist.name}</div>
+                                <div class="artist-specialty">${artist.specialty}</div>
+                            </div>
+                        </div>
+                        <div class="artist-info">
+                            <div class="artist-stats">
+                                <span class="artist-exp">${artist.exp}</span>
+                            </div>
+                            <p>${artist.desc}</p>
+                            <div class="artist-social">
+                                ${artist.social.map(s => `
+                                    <a href="${s.href}" target="_blank" class="social-icon" title="${s.label}">
+                                        ${s.icon}
+                                    </a>
+                                `).join('')}
+                            </div>
+                            <button class="view-gallery-btn" data-index="${index}">
+                                Ver Galería
+                            </button>
+                        </div>
+                    `;
+                    artistsTrack.appendChild(card);
+
+                    // Crear indicador
+                    const indicator = document.createElement('button');
+                    indicator.className = 'carousel-indicator';
+                    if (index === 0) indicator.classList.add('active');
+                    indicator.addEventListener('click', () => {
+                        goToSlide(index);
+                    });
+                    indicators.appendChild(indicator);
+                });
+
+                // Preparar efecto infinito después de renderizar
+                prepareInfiniteEffect();
+
+                // Asignar eventos a los botones "Ver Galería"
+                const galleryBtns = artistsTrack.querySelectorAll('.view-gallery-btn');
+                galleryBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const idx = parseInt(this.getAttribute('data-index'));
+                        showArtistGallery(idx);
+                    });
+                });
+            }
+
+            // Actualizar posición del carrusel con transición suave
+            function updateCarouselPosition(instant = false) {
+                if (instant) {
+                    artistsTrack.style.transition = 'none';
+                } else {
+                    artistsTrack.style.transition = 'transform 0.5s ease';
+                }
+
+                // Ajustar para el efecto infinito
+                const totalSlides = artists.length;
+                let slideIndex = currentSlide;
+
+                // Si estamos en el clon del primer elemento , saltar al último real
+                if (currentSlide === -1) {
+                    slideIndex = totalSlides - 1;
+                    setTimeout(() => {
+                        isTransitioning = true;
+                        artistsTrack.style.transition = 'none';
+                        currentSlide = totalSlides - 1;
+                        artistsTrack.style.transform = `translateX(-${(currentSlide + 1) * cardWidth}px)`;
+                        isTransitioning = false;
+                    }, 500);
+                }
+                // Si estamos en el clon del último elemento, saltar al primero real
+                else if (currentSlide === totalSlides) {
+                    slideIndex = 0;
+                    setTimeout(() => {
+                        isTransitioning = true;
+                        artistsTrack.style.transition = 'none';
+                        currentSlide = 0;
+                        artistsTrack.style.transform = `translateX(-${(currentSlide + 1) * cardWidth}px)`;
+                        isTransitioning = false;
+                    }, 500);
+                }
+
+                artistsTrack.style.transform = `translateX(-${(currentSlide + 1) * cardWidth}px)`;
+
+                // Actualizar indicadores 
+                const realSlideIndex = (slideIndex + totalSlides) % totalSlides;
+                const indicatorBtns = indicators.querySelectorAll('.carousel-indicator');
+                indicatorBtns.forEach((btn, index) => {
+                    if (index === realSlideIndex) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            // Ir a slide específico
+            function goToSlide(slideIndex) {
+                if (isTransitioning) return;
+                isTransitioning = true;
+                currentSlide = slideIndex;
+                updateCarouselPosition();
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 500);
+            }
+
+            // Slide anterior
+            function prevSlide() {
+                if (isTransitioning) return;
+                currentSlide--;
+                updateCarouselPosition();
+            }
+
+            // Slide siguiente
+            function nextSlide() {
+                if (isTransitioning) return;
+                currentSlide++;
+                updateCarouselPosition();
+            }
+
+            // Iniciar auto-avance
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    nextSlide();
+                }, 5000);
+            }
+
+            // Detener auto-avance
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+
+            // Event listeners para flechas
+            prevBtn.addEventListener('click', () => {
+                stopAutoSlide();
+                prevSlide();
+                startAutoSlide();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                stopAutoSlide();
+                nextSlide();
+                startAutoSlide();
+            });
+
+            // Pausar auto-avance cuando el mouse está sobre el carrusel
+            artistsTrack.addEventListener('mouseenter', stopAutoSlide);
+            artistsTrack.addEventListener('mouseleave', startAutoSlide);
+
+            // Resetear posición cuando termine la transición
+            artistsTrack.addEventListener('transitionend', () => {
+                const totalSlides = artists.length;
+                // Si estamos en el clon del primer elemento saltar al último real
+                if (currentSlide === -1) {
+                    currentSlide = totalSlides - 1;
+                    updateCarouselPosition(true);
+                }
+                // Si estamos en el clon del último elemento, saltar al primero real
+                else if (currentSlide === totalSlides) {
+                    currentSlide = 0;
+                    updateCarouselPosition(true);
+                }
+            });
+
+            // Función para mostrar la galería de un artista
+            function showArtistGallery(index) {
+                const artist = artists[index];
+                if (!artist) return;
+
+                artistNameDisplay.textContent = artist.name;
+                artistTattoosGrid.innerHTML = '';
+
+                artist.tattoos.forEach(tattoo => {
+                    const item = document.createElement('div');
+                    item.className = 'artist-tattoo-item';
+                    item.innerHTML = `
+                        <img src="${tattoo.img}" alt="Tatuaje de ${artist.name}">
+                        <div class="artist-tattoo-caption">${tattoo.caption}</div>
+                    `;
+                    artistTattoosGrid.appendChild(item);
+                               });
+
+               
+
+                artistGallery.classList.add('active');
+                artistsSection.style.display = 'none';
+
+                // Scroll suave a la galería
+                artistGallery.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Función para volver a los artistas
+            backToArtistsBtn.addEventListener('click', function() {
+                artistGallery.classList.remove('active');
+                artistsSection.style.display = 'block';
+
+                // Scroll suave a la sección de artistas
+                artistsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Inicializar
+            renderArtists();
+            startAutoSlide();
+        });
+
+        // Carrito de compras
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartOverlay = document.querySelector('.cart-overlay');
+            const cartBtn = document.querySelector('.cart-icon');
+            const closeCart = document.querySelector('.close-cart');
+            const cartContent = document.getElementById('cart-content');
+            const cartTotal = document.getElementById('cart-total-amount');
+            const cartCountEls = document.querySelectorAll('.cart-count');
+            const whatsappCheckout = document.getElementById('whatsapp-checkout');
+
+            let cart = [];
+
+            // Delegación para botones "Añadir al carrito"
+            document.body.addEventListener('click', function(e) {
+                const btn = e.target.closest('.add-to-cart');
+                if (!btn) return;
+                const id = btn.getAttribute('data-id');
+                const name = btn.getAttribute('data-name');
+                const price = parseFloat(btn.getAttribute('data-price'));
+                const image = btn.getAttribute('data-image');
+
+                // Verificar si el producto ya está en el carrito
+                const existingItem = cart.find(item => item.id === id);
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id,
+                        name,
+                        price,
+                        image,
+                        quantity: 1
+                    });
+                }
+
+                updateCart();
+                showAddedToCart(name);
+            });
+
+            // Abrir carrito
+            cartBtn.addEventListener('click', () => {
+                cartOverlay.style.display = 'flex';
+            });
+
+            // Cerrar carrito
+            closeCart.addEventListener('click', () => {
+                cartOverlay.style.display = 'none';
+            });
+
+            // Actualizar carrito
+            function updateCart() {
+                cartContent.innerHTML = '';
+                let total = 0;
+                let count = 0;
+
+                cart.forEach(item => {
+                    total += item.price * item.quantity;
+                    count += item.quantity;
+
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+                    cartItem.innerHTML = `
+                        <div class="cart-item-img">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <div style="display:flex;align-items:center;gap:0.5rem;">
+                                <button class="cart-qty-btn" data-id="${item.id}" data-action="decrease" style="width:28px;height:28px;font-size:1.2rem;">-</button>
+                                <span class="cart-qty">${item.quantity}</span>
+                                <button class="cart-qty-btn" data-id="${item.id}" data-action="increase" style="width:28px;height:28px;font-size:1.2rem;">+</button>
+                            </div>
+                            <p class="cart-item-price">$${item.price.toLocaleString('es-CO')}</p>
+                            <p class="remove-item" data-id="${item.id}">Eliminar</p>
+                        </div>
+                    `;
+                    cartContent.appendChild(cartItem);
+                });
+
+                cartTotal.textContent = total.toLocaleString('es-CO');
+                cartCountEls.forEach(el => el.textContent = count);
+
+                // Delegación para eliminar items y cambiar cantidad
+                cartContent.querySelectorAll('.remove-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const id = item.getAttribute('data-id');
+                        cart = cart.filter(product => product.id !== id);
+                        updateCart();
+                    });
+                });
+
+                cartContent.querySelectorAll('.cart-qty-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.getAttribute('data-id');
+                        const action = btn.getAttribute('data-action');
+                        const cartItem = cart.find(product => product.id === id);
+                        if (!cartItem) return;
+                        if (action === 'increase') {
+                            cartItem.quantity += 1;
+                        } else if (action === 'decrease') {
+                            cartItem.quantity -= 1;
+                            if (cartItem.quantity <= 0) {
+                                cart = cart.filter(product => product.id !== id);
+                            }
+                        }
+                        updateCart();
+                    });
+                });
+            }
+
+            // Mostrar notificación de producto añadido
+            function showAddedToCart(productName) {
+                const notification = document.createElement('div');
+                notification.style.position = 'fixed';
+                notification.style.bottom = '20px';
+                notification.style.right = '20px';
+                notification.style.backgroundColor = '#111';
+                notification.style.color = '#fff';
+                notification.style.padding = '15px 25px';
+                notification.style.borderRadius = '5px';
+                notification.style.zIndex = '3000';
+                notification.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
+                notification.textContent = `✔ ${productName} añadido al carrito`;
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transition = 'opacity 0.5s';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 2000);
+            }
+
+            // Enviar pedido por WhatsApp
+            whatsappCheckout.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('El carrito está vacío.');
+                    return;
+                }
+                let mensaje = '¡Hola! Quiero comprar:%0A';
+                cart.forEach(item => {
+                    mensaje += `- ${item.name} x${item.quantity} ($${item.price.toLocaleString('es-CO')} c/u)%0A`;
+                });
+                mensaje += `Total: $${cartTotal.textContent}%0A`;
+                mensaje += `¿Me puedes ayudar con el pedido?`;
+
+                const numero = '573214583086';
+                const url = `https://wa.me/${numero}?text=${mensaje}`;
+                window.open(url, '_blank');
+            });
+        });
+
+        // Carrito de compras
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartOverlay = document.querySelector('.cart-overlay');
+            const cartBtn = document.querySelector('.cart-icon');
+            const closeCart = document.querySelector('.close-cart');
+            const cartContent = document.getElementById('cart-content');
+            const cartTotal = document.getElementById('cart-total-amount');
+            const cartCountEls = document.querySelectorAll('.cart-count');
+            const whatsappCheckout = document.getElementById('whatsapp-checkout');
+
+            let cart = [];
+
+            // Delegación para botones "Añadir al carrito"
+            document.body.addEventListener('click', function(e) {
+                const btn = e.target.closest('.add-to-cart');
+                if (!btn) return;
+                const id = btn.getAttribute('data-id');
+                const name = btn.getAttribute('data-name');
+                const price = parseFloat(btn.getAttribute('data-price'));
+                const image = btn.getAttribute('data-image');
+
+                // Verificar si el producto ya está en el carrito
+                const existingItem = cart.find(item => item.id === id);
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id,
+                        name,
+                        price,
+                        image,
+                        quantity: 1
+                    });
+                }
+
+                updateCart();
+                showAddedToCart(name);
+            });
+
+            // Abrir carrito
+            cartBtn.addEventListener('click', () => {
+                cartOverlay.style.display = 'flex';
+            });
+
+            // Cerrar carrito
+            closeCart.addEventListener('click', () => {
+                cartOverlay.style.display = 'none';
+            });
+
+            // Actualizar carrito
+            function updateCart() {
+                cartContent.innerHTML = '';
+                let total = 0;
+                let count = 0;
+
+                cart.forEach(item => {
+                    total += item.price * item.quantity;
+                    count += item.quantity;
+
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('cart-item');
+                    cartItem.innerHTML = `
+                        <div class="cart-item-img">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <div style="display:flex;align-items:center;gap:0.5rem;">
+                                <button class="cart-qty-btn" data-id="${item.id}" data-action="decrease" style="width:28px;height:28px;font-size:1.2rem;">-</button>
+                                <span class="cart-qty">${item.quantity}</span>
+                                <button class="cart-qty-btn" data-id="${item.id}" data-action="increase" style="width:28px;height:28px;font-size:1.2rem;">+</button>
+                            </div>
+                            <p class="cart-item-price">$${item.price.toLocaleString('es-CO')}</p>
+                            <p class="remove-item" data-id="${item.id}">Eliminar</p>
+                        </div>
+                    `;
+                    cartContent.appendChild(cartItem);
+                });
+
+                cartTotal.textContent = total.toLocaleString('es-CO');
+                cartCountEls.forEach(el => el.textContent = count);
+
+                // Delegación para eliminar items y cambiar cantidad
+                cartContent.querySelectorAll('.remove-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const id = item.getAttribute('data-id');
+                        cart = cart.filter(product => product.id !== id);
+                        updateCart();
+                    });
+                });
+
+                cartContent.querySelectorAll('.cart-qty-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.getAttribute('data-id');
+                        const action = btn.getAttribute('data-action');
+                        const cartItem = cart.find(product => product.id === id);
+                        if (!cartItem) return;
+                        if (action === 'increase') {
+                            cartItem.quantity += 1;
+                        } else if (action === 'decrease') {
+                            cartItem.quantity -= 1;
+                            if (cartItem.quantity <= 0) {
+                                cart = cart.filter(product => product.id !== id);
+                            }
+                        }
+                        updateCart();
+                    });
+                });
+            }
+
+            // Mostrar notificación de producto añadido
+            function showAddedToCart(productName) {
+                const notification = document.createElement('div');
+                notification.style.position = 'fixed';
+                notification.style.bottom = '20px';
+                notification.style.right = '20px';
+                notification.style.backgroundColor = '#111';
+                notification.style.color = '#fff';
+                notification.style.padding = '15px 25px';
+                notification.style.borderRadius = '5px';
+                notification.style.zIndex = '3000';
+                notification.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
+                notification.textContent = `✔ ${productName} añadido al carrito`;
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transition = 'opacity 0.5s';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 2000);
+            }
+
+            // Enviar pedido por WhatsApp
+            whatsappCheckout.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('El carrito está vacío.');
+                    return;
+                }
+                let mensaje = '¡Hola! Quiero comprar:%0A';
+                cart.forEach(item => {
+                    mensaje += `- ${item.name} x${item.quantity} ($${item.price.toLocaleString('es-CO')} c/u)%0A`;
+                });
+                mensaje += `Total: $${cartTotal.textContent}%0A`;
+                mensaje += `¿Me puedes ayudar con el pedido?`;
+
+                const numero = '573214583086';
+                const url = `https://wa.me/${numero}?text=${mensaje}`;
+                window.open(url, '_blank');
+            });
+        });
+
+        // Carrusel de imágenes para cada producto
+        document.addEventListener('DOMContentLoaded', function() {
+            // Por cada producto, inicializar el índice de imagen
+            const carousels = document.querySelectorAll('.product-carousel');
+            const carouselIndexes = {};
+
+            carousels.forEach(carousel => {
+                const productId = carousel.getAttribute('data-product');
+                carouselIndexes[productId] = 0;
+                updateCarousel(productId);
+            });
+
+            // Función para actualizar la visibilidad de imágenes en el carrusel
+            function updateCarousel(productId) {
+                const carousel = document.querySelector('.product-carousel[data-product="' + productId + '"]');
+                const images = carousel.querySelectorAll('img');
+                images.forEach((img, idx) => {
+                    img.style.display = (idx === carouselIndexes[productId]) ? 'block' : 'none';
+                });
+            }
+
+            // Evento para flechas del carrusel
+            document.querySelectorAll('.carousel-arrow-product').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const productId = this.getAttribute('data-product');
+                    const carousel = document.querySelector('.product-carousel[data-product="' + productId + '"]');
+                    const images = carousel.querySelectorAll('img');
+                    let idx = carouselIndexes[productId];
+                    if (this.classList.contains('left')) {
+                        idx = (idx - 1 + images.length) % images.length;
+                    } else {
+                        idx = (idx + 1) % images.length;
+                    }
+                    carouselIndexes[productId] = idx;
+                    updateCarousel(productId);
+                });
+            });
+
+            // Evento para abrir la información completa del producto en otra pestaña
+            carousels.forEach(carousel => {
+                carousel.querySelectorAll('img').forEach(img => {
+                    img.addEventListener('click', function() {
+                        const link = img.getAttribute('data-link');
+                        if (link) window.open(link, '_blank');
+                    });
+                });
+            });
+        });
+
+        // Barra de búsqueda de productos
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('product-search');
+            const productsGrid = document.getElementById('products-grid-all');
+            if (searchInput && productsGrid) {
+                searchInput.addEventListener('input', function() {
+                    const query = this.value.toLowerCase();
+                    const cards = productsGrid.querySelectorAll('.product-card');
+                    cards.forEach(card => {
+                        const name = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                        const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
+                        if (name.includes(query) || desc.includes(query)) {
+                            card.style.display = '';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+
+        // GALERÍA
+        document.addEventListener('DOMContentLoaded', function() {
+            // Datos de la galería
+            const galleryData = [
+                {
+                    img: "images/tatto_Daniela- copia/tattoo13.jpg",
+                    title: "Anime Color",
+                    artist: "Daniela Vallejo",
+                    style: "Anime",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo12.jpg",
+                    title: "Realista Color",
+                    artist: "Daniela Vallejo",
+                    style: "Anime",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo11.jpg",
+                    title: "Mandalas Geométricas",
+                    artist: "Daniela Vallejo",
+                    style: "Blackwork",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo10.jpg",
+                    title: "Blackwork Abstracto",
+                    artist: "Daniela Vallejo",
+                    style: "Color",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo9.jpg",
+                    title: "Retrato a Color",
+                    artist: "Daniela Vallejo",
+                    style: "Color",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo8.jpg",
+                    title: "Líneas Minimalistas",
+                    artist: "Daniela Vallejo",
+                    style: "Blackwork",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo7.jpg",
+                    title: "Anime Colorido",
+                    artist: "Daniela Vallejo",
+                    style: "Blackwork",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo6.jpg",
+                    title: "Dotwork Detallado",
+                    artist: "Daniela Vallejo",
+                    style: "Color",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo5.jpg",
+                    title: "Blackwork Tribal",
+                    artist: "Daniela Vallejo",
+                    style: "Color",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo4.jpg",
+                    title: "Floral Tradicional",
+                    artist: "Daniela Vallejo",
+                    style: "Color",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo3.jpg",
+                    title: "Geometría Sagrada",
+                    artist: "Daniela Vallejo",
+                    style: "Color",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo2.jpg",
+                    title: "Minimalista Abstracto",
+                    artist: "Daniela Vallejo",
+                    style: "Color",
+                    year: "2025"
+                },
+                {
+                    img: "images/tatto_Daniela- copia/tattoo1.jpg",
+                    title: "Tatuaje destacado",
+                    artist: "Daniela Vallejo",
+                    style: "Color",
+                    year: "2025"
+                }
+            ];
+            
+            // Elementos del DOM
+            const galleryGrid = document.getElementById('gallery-grid');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const galleryModal = document.getElementById('gallery-modal');
+            const modalImg = document.getElementById('modal-img');
+            const modalTitle = document.getElementById('modal-title');
+            const modalArtist = document.getElementById('modal-artist');
+            const modalStyle = document.getElementById('modal-style');
+            const closeModal = document.getElementById('close-modal');
+            const prevBtn = document.getElementById('modal-prev');
+            const nextBtn = document.getElementById('modal-next');
+            
+            let currentIndex = 0;
+            let filteredData = [];
+            
+            // Renderizar galería
+            function renderGallery(filter = 'all') {
+                galleryGrid.innerHTML = '';
+                
+                filteredData = filter === 'all' 
+                    ? galleryData 
+                    : galleryData.filter(item => item.style.toLowerCase() === filter);
+                
+                filteredData.forEach((item, index) => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.dataset.index = index;
+                    galleryItem.dataset.style = item.style.toLowerCase();
+                    
+                    galleryItem.innerHTML = `
+                        <img src="${item.img}" alt="${item.title}" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3 class="tattoo-title">${item.title}</h3>
+                            <p class="tattoo-artist">Por ${item.artist} - ${item.year}</p>
+                            <span class="tattoo-style">${item.style}</span>
+                        </div>
+                    `;
+                    
+                    galleryGrid.appendChild(galleryItem);
+                    
+                    // Evento click para abrir modal
+                    galleryItem.addEventListener('click', () => {
+                        openModal(index);
+                    });
+                });
+            }
+            
+            // Abrir modal
+            function openModal(index) {
+                currentIndex = index;
+                const item = filteredData[index];
+                
+                modalImg.src = item.img;
+                modalImg.alt = item.title;
+                modalTitle.textContent = item.title;
+                modalArtist.textContent = `Por ${item.artist} - ${item.year}`;
+                modalStyle.textContent = item.style;
+                
+                galleryModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Cerrar modal
+            function closeModalFunc() {
+                galleryModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Navegación del modal
+            function navigateModal(direction) {
+                if (direction === 'prev') {
+                    currentIndex = (currentIndex - 1 + filteredData.length) % filteredData.length;
+                } else {
+                    currentIndex = (currentIndex + 1) % filteredData.length;
+                }
+                
+                const item = filteredData[currentIndex];
+                modalImg.src = item.img;
+                modalImg.alt = item.title;
+                modalTitle.textContent = item.title;
+                modalArtist.textContent = `Por ${item.artist} - ${item.year}`;
+                modalStyle.textContent = item.style;
+                
+                // Efecto de transición
+                modalImg.style.opacity = 0;
+                setTimeout(() => {
+                    modalImg.style.opacity = 1;
+                    modalImg.style.transition = 'opacity 0.3s';
+                }, 10);
+            }
+            
+            // Event listeners
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.dataset.filter;
+                    renderGallery(filter);
+                });
+            });
+            
+            closeModal.addEventListener('click', closeModalFunc);
+            
+            prevBtn.addEventListener('click', () => navigateModal('prev'));
+            nextBtn.addEventListener('click', () => navigateModal('next'));
+            
+            // Cerrar modal al hacer click fuera de la imagen
+            galleryModal.addEventListener('click', (e) => {
+                if (e.target === galleryModal) {
+                    closeModalFunc();
+                }
+            });
+            
+            // Navegación con teclado
+            document.addEventListener('keydown', (e) => {
+                if (!galleryModal.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    closeModalFunc();
+                } else if (e.key === 'ArrowLeft') {
+                    navigateModal('prev');
+                } else if (e.key === 'ArrowRight') {
+                    navigateModal('next');
+                }
+            });
+            
+            // Inicializar galería
+            renderGallery();
+        });
+
+        // Paginación de productos (3 filas por página, 3*columnas por página)
+        document.addEventListener('DOMContentLoaded', function() {
+            const productsGrid = document.getElementById('products-grid-all');
+            const pagination = document.getElementById('products-pagination');
+            const searchInput = document.getElementById('product-search');
+            
+            function getProductsPerRow() {
+                const gridStyles = window.getComputedStyle(productsGrid);
+                const templateColumns = gridStyles.getPropertyValue('grid-template-columns');
+                const cols = templateColumns.split(' ').length;
+                return cols > 0 ? cols : 1;
+            }
+
+            let PRODUCTS_PER_PAGE = 9; // fallback
+            let currentPage = 1;
+            let filteredCards = [];
+
+            function getAllCards() {
+                return Array.from(productsGrid.querySelectorAll('.product-card'));
+            }
+
+            function showPage(page, cards) {
+                PRODUCTS_PER_PAGE = getProductsPerRow() * 3;
+                const total = cards.length;
+                const start = (page - 1) * PRODUCTS_PER_PAGE;
+                const end = start + PRODUCTS_PER_PAGE;
+                cards.forEach((card, idx) => {
+                    card.style.display = (idx >= start && idx < end) ? '' : 'none';
+                });
+                renderPagination(page, Math.ceil(total / PRODUCTS_PER_PAGE));
+            }
+
+            function renderPagination(page, totalPages) {
+                pagination.innerHTML = '';
+                if (totalPages <= 1) return;
+                
+                const prev = document.createElement('button');
+                prev.textContent = 'Anterior';
+                prev.disabled = page === 1;
+                prev.style.margin = '0 0.5rem';
+                prev.onclick = () => {
+                    if (page > 1) {
+                        currentPage--;
+                        showPage(currentPage, filteredCards);
+                    }
+                };
+                pagination.appendChild(prev);
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const btn = document.createElement('button');
+                    btn.textContent = i;
+
+                    btn.disabled = i === page;
+                    btn.style.margin = '0 0.2rem';
+                    btn.onclick = () => {
+                        currentPage = i;
+                        showPage(currentPage, filteredCards);
+                    };
+                    pagination.appendChild(btn);
+                }
+
+                const next = document.createElement('button');
+                next.textContent = 'Siguiente';
+                next.disabled = page === totalPages;
+                next.style.margin = '0 0.5rem';
+                next.onclick = () => {
+                    if (page < totalPages) {
+                        currentPage++;
+                        showPage(currentPage, filteredCards);
+                    }
+                };
+                pagination.appendChild(next);
+            }
+
+            function filterAndPaginate() {
+                const query = (searchInput?.value || '').toLowerCase();
+                filteredCards = getAllCards().filter(card => {
+                    const name = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                    const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
+                    return name.includes(query) || desc.includes(query);
+                });
+                currentPage = 1;
+                showPage(currentPage, filteredCards);
+            }
+
+            // Inicializar
+            filteredCards = getAllCards();
+            showPage(currentPage, filteredCards);
+
+            if (searchInput) {
+                searchInput.addEventListener('input', filterAndPaginate);
+            }
+
+            window.addEventListener('resize', function() {
+                showPage(currentPage, filteredCards);
+            });
+        });
+
+        // Enviar formulario de contacto por WhatsApp
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-whatsapp-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const nombre = document.getElementById('contact-name').value.trim();
+                    const email = document.getElementById('contact-email').value.trim();
+                    const telefono = document.getElementById('contact-phone').value.trim();
+                    const mensaje = document.getElementById('contact-message').value.trim();
+
+                    let texto = `¡Hola! Quiero reservar una cita.\n`;
+                    texto += `Nombre: ${nombre}\n`;
+                    texto += `Email: ${email}\n`;
+                    if (telefono) texto += `Teléfono: ${telefono}\n`;
+                    if (mensaje) texto += `Mensaje: ${mensaje}\n`;
+
+                    const numero = '573214583086'; // Número de WhatsApp
+                    if (!numero) {
+                        alert('Número de WhatsApp no configurado.');
+                        return;
+                    }
+                    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+                    window.open(url, '_blank');
+                });
+            }
+        });
+
+        // Nuevo JavaScript para filtrar por categoría de productos
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryFilters = document.querySelectorAll('.category-filter');
+            
+            categoryFilters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    // Remover clase active de todos los botones
+                    categoryFilters.forEach(f => f.classList.remove('active'));
+                    // Añadir clase active al botón clickeado
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    filterProductsByCategory(category);
+                });
+            });
+            
+            function filterProductsByCategory(category) {
+                const allProducts = document.querySelectorAll('.product-card');
+                allProducts.forEach(product => {
+                    if (category === 'all') {
+                        product.style.display = '';
+                    } else {
+                        const productCategory = product.getAttribute('data-category');
+                        if (productCategory === category) {
+                            product.style.display = '';
+                        } else {
+                            product.style.display = 'none';
+                        }
+                    }
+                });
+                // Actualizar la paginación si existe
+                if (window.updatePagination) {
+                    window.updatePagination();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
