@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>EDGECREW | Sube tus imágenes - Tienda Streetwear</title>
-    <meta name="description" content="EDGECREW - Ropa streetwear premium. Sube tus productos con imágenes locales.">
+    <title>EDGECREW | Panel de Administración - Tienda Streetwear</title>
+    <meta name="description" content="EDGECREW - Ropa streetwear premium. Administra productos, sube imágenes, gestiona inventario.">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -41,11 +41,6 @@
             transition: all 0.3s;
         }
         header.scrolled { padding: 0.5rem 2rem; background: #fffbf7; }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
         .logo span {
             font-size: 1.5rem;
             font-weight: 800;
@@ -63,6 +58,7 @@
             position: relative;
             color: #000;
             transition: 0.2s;
+            text-decoration: none;
         }
         nav ul li a::after {
             content: '';
@@ -133,7 +129,6 @@
             background: rgba(255,255,255,0.95);
             border: 2px solid #000;
             border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             animation: fadeInUp 0.7s ease;
         }
         @keyframes fadeInUp {
@@ -278,7 +273,6 @@
         }
         .filter-btn.active, .filter-btn:hover { background: #000; color: white; }
 
-        /* Carrito */
         .cart-overlay {
             position: fixed;
             top: 0;
@@ -338,7 +332,6 @@
             margin: 1rem 0;
             border-top: 1px solid #e0e0e0;
             padding-top: 1rem;
-            color: #000;
         }
         .cart-discount {
             background: #f5f5f5;
@@ -353,7 +346,6 @@
             border: 1px solid #000;
             border-radius: 12px;
             padding: 0.6rem;
-            color: #000;
             margin: 0.8rem 0;
             resize: vertical;
         }
@@ -381,12 +373,11 @@
             flex-wrap: wrap;
             border: 2px solid #000;
             position: relative;
-            color: #000;
         }
         .modal-content img { max-width: 250px; border-radius: 16px; background: #f5f5f5; object-fit: contain; }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: #000; }
 
-        /* ADMIN */
+        /* ADMIN PANEL MEJORADO */
         .admin-panel {
             position: fixed;
             top: 0;
@@ -406,13 +397,12 @@
             background: #fff;
             border: 2px solid #000;
             border-radius: 24px;
-            max-width: 950px;
+            max-width: 1200px;
             width: 100%;
             padding: 2rem;
             max-height: 90vh;
             overflow-y: auto;
         }
-        .admin-container h2 { color: #000; margin-bottom: 1.5rem; text-align: center; }
         .admin-form input, .admin-form textarea, .admin-form select {
             width: 100%;
             padding: 0.7rem;
@@ -450,7 +440,7 @@
             position: absolute;
             top: 2px;
             right: 2px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             color: white;
             border-radius: 50%;
             width: 20px;
@@ -458,6 +448,7 @@
             font-size: 12px;
             text-align: center;
             cursor: pointer;
+            line-height: 18px;
         }
         .product-list-admin { margin-top: 2rem; }
         .product-admin-item {
@@ -503,7 +494,7 @@
             transition: 0.3s;
         }
         .notification.show { transform: translateY(0); opacity: 1; }
-        .notification.error { background: #333; }
+        .notification.error { background: #d32f2f; }
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -518,6 +509,7 @@
             font-size: 1.8rem;
             text-decoration: none;
             color: white;
+            z-index: 1000;
         }
         @media (max-width: 768px) {
             .mobile-menu-btn { display: flex; }
@@ -535,6 +527,7 @@
             nav ul { flex-direction: column; gap: 1rem; }
             .hero h1 { font-size: 2rem; }
             section { padding: 3rem 1rem; }
+            .admin-container { padding: 1rem; }
         }
         .scroll-reveal { opacity: 0; transform: translateY(30px); transition: 0.6s; }
         .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
@@ -564,7 +557,7 @@
     <section id="about">
         <h2 class="section-title scroll-reveal">SOBRE NOSOTROS</h2>
         <div style="max-width:800px; margin:0 auto; text-align:center" class="scroll-reveal">
-            <p>En EDGECREW creemos que la moda no tiene límites. Cada prenda es diseñada para quienes desafían lo convencional. Sube tus productos con imágenes reales.</p>
+            <p>En EDGECREW creemos que la moda no tiene límites. Cada prenda es diseñada para quienes desafían lo convencional. Sube tus productos con imágenes reales desde el panel de administración.</p>
         </div>
     </section>
 
@@ -584,15 +577,76 @@
     </section>
     <footer><p>&copy; 2025 EDGECREW - <span class="admin-link" id="openAdminBtn">Admin</span></p></footer>
 
-    <!-- Carrito, modales, etc -->
+    <!-- Carrito y modales -->
     <div class="cart-overlay"><div class="cart"><div class="cart-header"><h3>Mi Carrito</h3><div class="close-cart">✖</div></div><div id="cart-content"></div><textarea id="cart-notes" placeholder="Notas (talla, color...)"></textarea><div id="cart-discount" class="cart-discount" style="display:none;">🎉 Descuento: -$<span id="cart-discount-amount">0</span></div><div class="cart-total">Total: $<span id="cart-total-amount">0</span></div><button id="whatsapp-checkout" class="btn">Comprar por WhatsApp</button></div></div>
     <div id="product-modal" class="product-modal"><div class="modal-content"><span class="close-modal">&times;</span><img id="modal-img" src=""><div class="modal-info"><h2 id="modal-title"></h2><p id="modal-desc"></p><p id="modal-price" style="font-size:1.8rem;"></p><p id="modal-stock"></p><button id="modal-add-to-cart" class="btn">Añadir</button></div></div></div>
     <div id="admin-login-modal" class="product-modal"><div class="modal-content" style="flex-direction:column; width:350px;"><span class="close-modal" id="closeLoginBtn">&times;</span><h2>Acceso Admin</h2><input type="text" id="admin-user" placeholder="Usuario"><input type="password" id="admin-pass" placeholder="Contraseña"><button id="login-btn" class="btn">Entrar</button><p id="login-error" style="color:red; display:none;"></p></div></div>
-    <div id="admin-panel" class="admin-panel"><div class="admin-container"><div style="display:flex; justify-content:space-between;"><h2>Administrador - Sube imágenes</h2><span class="close-admin" id="closeAdminBtn">Cerrar</span></div><div class="admin-form"><input type="text" id="prod-id" placeholder="ID (auto)" readonly><input type="text" id="prod-name" placeholder="Nombre" required><select id="prod-category"><option value="hombre">Hombre</option><option value="mujer">Mujer</option><option value="accesorios">Accesorios</option></select><input type="number" id="prod-price" placeholder="Precio" required><textarea id="prod-desc" placeholder="Descripción" rows="2"></textarea><input type="number" id="prod-stock" placeholder="Stock" value="10"><input type="number" id="prod-rating" placeholder="Rating (0-5)" step="0.1" min="0" max="5" value="4.5"><label>Subir imágenes (múltiples):</label><input type="file" id="prod-images-file" accept="image/*" multiple><div id="image-preview-container" class="image-preview-area"></div><button id="save-product-btn">Guardar Producto</button><button id="reset-form-btn">Limpiar</button></div><div class="product-list-admin" id="admin-product-list"></div></div></div>
+    
+    <!-- PANEL ADMIN MEJORADO -->
+    <div id="admin-panel" class="admin-panel">
+        <div class="admin-container">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap;">
+                <h2>📦 Administrar Productos</h2>
+                <span class="close-admin" id="closeAdminBtn">✕ Cerrar</span>
+            </div>
+            
+            <div style="background:#f0f0f0; padding:1rem; border-radius:12px; margin-bottom:1.5rem; border-left:4px solid #000;">
+                <h3 style="margin-bottom:0.5rem; font-size:1.1rem;">📝 Instrucciones:</h3>
+                <ol style="margin-left:1.5rem; line-height:1.8;">
+                    <li>Completa todos los campos del producto (nombre, precio, categoría, etc.)</li>
+                    <li>Selecciona una o más imágenes desde tu computadora</li>
+                    <li>Revisa la vista previa en la columna derecha</li>
+                    <li>Haz clic en <strong>Guardar Producto</strong></li>
+                    <li>Los productos se guardan automáticamente en tu navegador</li>
+                </ol>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem;">
+                <!-- Formulario -->
+                <div class="admin-form">
+                    <h3 style="margin-bottom:1rem;">Datos del Producto:</h3>
+                    <input type="text" id="prod-id" placeholder="ID (automático)" readonly style="background:#ddd;">
+                    <input type="text" id="prod-name" placeholder="Nombre del producto *" required>
+                    <select id="prod-category" required>
+                        <option value="" disabled selected>-- Selecciona categoría --</option>
+                        <option value="hombre">👕 Hombre</option>
+                        <option value="mujer">👗 Mujer</option>
+                        <option value="accesorios">🎒 Accesorios</option>
+                    </select>
+                    <input type="number" id="prod-price" placeholder="Precio en COP *" required>
+                    <textarea id="prod-desc" placeholder="Descripción del producto" rows="3" maxlength="150"></textarea>
+                    <input type="number" id="prod-stock" placeholder="Stock" value="10" min="0">
+                    <input type="number" id="prod-rating" placeholder="Calificación (0-5)" step="0.1" min="0" max="5" value="4.5">
+                    
+                    <label style="display:block; margin:1rem 0 0.5rem; font-weight:bold;">📸 Subir Imágenes (múltiples):</label>
+                    <input type="file" id="prod-images-file" accept="image/*" multiple>
+                    <div id="image-preview-container" class="image-preview-area" style="margin-top:0.5rem;"></div>
+                    
+                    <div style="display:flex; gap:1rem; margin-top:1rem;">
+                        <button id="save-product-btn" style="flex:1; background:#000; color:white; padding:0.8rem; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">✓ Guardar Producto</button>
+                        <button id="reset-form-btn" style="flex:1; background:#666; color:white; padding:0.8rem; border:none; border-radius:8px; cursor:pointer;">🗑️ Limpiar</button>
+                    </div>
+                </div>
+
+                <!-- Vista previa en tiempo real -->
+                <div style="background:#f5f5f5; padding:1rem; border-radius:12px; border:1px solid #ddd;">
+                    <h3 style="margin-bottom:1rem;">👁️ Vista Previa del Producto</h3>
+                    <div id="product-preview" style="background:white; border-radius:8px; padding:1rem; min-height:350px; text-align:center;">
+                        <p style="color:#999;">Completa los datos para ver la previsualización...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-list-admin">
+                <h3 style="margin-top:1rem; margin-bottom:1rem;">📋 Productos Existentes</h3>
+                <div id="admin-product-list"></div>
+            </div>
+        </div>
+    </div>
     <a href="https://wa.me/573214583086" class="whatsapp-float" target="_blank">💬</a>
 
     <script>
-        // ------------------- DATA -------------------
+        // ==================== DATA Y STORAGE ====================
         let products = [];
         let cart = [];
         let favorites = [];
@@ -600,16 +654,15 @@
         let discountApplied = false;
         const VALID_CODE = "edgecrew20";
 
-        // Helper: guardar productos en localStorage
         function saveProducts() { localStorage.setItem('products', JSON.stringify(products)); }
         function loadProducts() {
             const stored = localStorage.getItem('products');
-            if(stored) { products = JSON.parse(stored); }
-            else {
-                // productos de ejemplo con imágenes base64 simuladas (simple placeholder base64)
+            if(stored) { 
+                products = JSON.parse(stored); 
+            } else {
                 const defaultImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23cccccc'/%3E%3Ctext x='10' y='55' fill='black' font-size='12'%3EEDGECREW%3C/text%3E%3C/svg%3E";
                 products = [
-                    { id: 1, name: "Hoodie Oversize", category: "hombre", price: 89000, desc: "Hoodie oversize con estampado agresivo.", stock: 12, rating: 4.8, images: [defaultImg, defaultImg] },
+                    { id: 1, name: "Hoodie Oversize", category: "hombre", price: 89000, desc: "Hoodie oversize con estampado agresivo.", stock: 12, rating: 4.8, images: ["./productos/AXEL-SPARTAN.png", defaultImg]},
                     { id: 2, name: "Leggings Seamless", category: "mujer", price: 69000, desc: "Leggings high waisted, compresión ideal.", stock: 15, rating: 4.9, images: [defaultImg] },
                     { id: 3, name: "Muscle Tank Top", category: "hombre", price: 45000, desc: "Tank top cortado al músculo.", stock: 20, rating: 4.7, images: [defaultImg] },
                     { id: 4, name: "Crop Top Gym", category: "mujer", price: 39000, desc: "Crop top deportivo.", stock: 18, rating: 4.6, images: [defaultImg] },
@@ -632,9 +685,16 @@
         function saveCartToLocal() { localStorage.setItem('cart', JSON.stringify(cart)); localStorage.setItem('cartNotes', cartNotes); updateCartCounters(); }
         function loadFavorites() { favorites = JSON.parse(localStorage.getItem('favorites') || '[]'); }
         function saveFavorites() { localStorage.setItem('favorites', JSON.stringify(favorites)); }
-        function showNotification(msg, isError = false) { const n = document.createElement('div'); n.className = `notification ${isError ? 'error' : ''}`; n.innerText = (isError ? '⚠️ ' : '✅ ') + msg; document.body.appendChild(n); setTimeout(() => n.classList.add('show'), 10); setTimeout(() => { n.classList.remove('show'); setTimeout(() => n.remove(), 2500); }, 2500); }
+        function showNotification(msg, isError = false) { 
+            const n = document.createElement('div'); 
+            n.className = `notification ${isError ? 'error' : ''}`; 
+            n.innerText = (isError ? '⚠️ ' : '✅ ') + msg; 
+            document.body.appendChild(n); 
+            setTimeout(() => n.classList.add('show'), 10); 
+            setTimeout(() => { n.classList.remove('show'); setTimeout(() => n.remove(), 2500); }, 2500); 
+        }
         function updateCartCounters() { const total = cart.reduce((s,i)=> s + i.quantity,0); document.querySelectorAll('.cart-count').forEach(el => el.textContent = total); }
-        function calculateTotals() { const subtotal = cart.reduce((s,i)=> s + (i.price * i.quantity),0); const disc = discountApplied ? Math.round(subtotal * 0.10) : 0; return { subtotal, discount: disc, total: subtotal - disc }; }
+        function calculateTotals() { const subtotal = cart.reduce((s,i)=> s + (i.price * i.quantity),0); const disc = discountApplied ? Math.round(subtotal * 0.20) : 0; return { subtotal, discount: disc, total: subtotal - disc }; }
         
         function renderCart() {
             const cartContainer = document.getElementById('cart-content'); if(!cartContainer) return;
@@ -712,10 +772,12 @@
             document.querySelectorAll('.quick-view').forEach(btn=>{ btn.onclick=e=>{ e.stopPropagation(); const id=parseInt(btn.dataset.id); const prod=products.find(p=>p.id===id); if(prod){ document.getElementById('modal-img').src=prod.images[0]; document.getElementById('modal-title').innerText=prod.name; document.getElementById('modal-desc').innerText=prod.desc; document.getElementById('modal-price').innerText=`$${prod.price.toLocaleString()}`; document.getElementById('modal-stock').innerText=`Stock: ${prod.stock}`; document.getElementById('product-modal').classList.add('active'); document.body.style.overflow='hidden'; window.currentModalProduct=prod; } }; });
         }
 
-        // ---------- ADMIN con subida de imágenes locales ----------
-        let currentImageFiles = []; // almacena base64 temporalmente
+        // ---------- ADMIN MEJORADO ----------
+        let currentImageFiles = []; // imágenes en base64 para el producto actual
+
         function updateImagePreview() {
             const container = document.getElementById('image-preview-container');
+            if(!container) return;
             container.innerHTML = '';
             currentImageFiles.forEach((base64, idx) => {
                 const div = document.createElement('div'); div.className = 'image-preview-item';
@@ -723,31 +785,41 @@
                 container.appendChild(div);
             });
             document.querySelectorAll('.remove-preview').forEach(btn => {
-                btn.onclick = (e) => { const idx = parseInt(btn.dataset.idx); currentImageFiles.splice(idx,1); updateImagePreview(); };
+                btn.onclick = (e) => { 
+                    const idx = parseInt(btn.dataset.idx); 
+                    currentImageFiles.splice(idx,1); 
+                    updateImagePreview(); 
+                    updateProductPreview(); 
+                };
             });
+            updateProductPreview();
         }
 
         document.getElementById('prod-images-file').addEventListener('change', function(e) {
             const files = Array.from(e.target.files);
             files.forEach(file => {
                 const reader = new FileReader();
-                reader.onload = function(ev) { currentImageFiles.push(ev.target.result); updateImagePreview(); };
+                reader.onload = function(ev) { 
+                    currentImageFiles.push(ev.target.result); 
+                    updateImagePreview(); 
+                };
                 reader.readAsDataURL(file);
             });
-            e.target.value = ''; // limpiar input
+            e.target.value = '';
         });
 
         function updateAdminProductList() {
             const container = document.getElementById('admin-product-list'); if(!container) return;
-            container.innerHTML = '<h3>Productos existentes</h3>';
+            container.innerHTML = '<h3 style="margin-bottom:1rem;">Productos existentes:</h3>';
+            if(products.length === 0) container.innerHTML += '<p>No hay productos. Crea el primero.</p>';
             products.forEach(p => {
                 const div = document.createElement('div'); div.className = 'product-admin-item';
-                div.innerHTML = `<span><strong>${p.name}</strong> - $${p.price} - Stock: ${p.stock}</span>
+                div.innerHTML = `<span><strong>${p.name}</strong> - $${p.price.toLocaleString()} - Stock: ${p.stock}</span>
                                 <div><button class="edit-prod" data-id="${p.id}">Editar</button><button class="delete-prod" data-id="${p.id}">Eliminar</button></div>`;
                 container.appendChild(div);
             });
-            document.querySelectorAll('.edit-prod').forEach(btn=>{ btn.onclick=()=>{ const id=parseInt(btn.dataset.id); const prod=products.find(p=>p.id===id); if(prod){ document.getElementById('prod-id').value=prod.id; document.getElementById('prod-name').value=prod.name; document.getElementById('prod-category').value=prod.category; document.getElementById('prod-price').value=prod.price; document.getElementById('prod-desc').value=prod.desc; document.getElementById('prod-stock').value=prod.stock; document.getElementById('prod-rating').value=prod.rating; currentImageFiles = [...prod.images]; updateImagePreview(); } }; });
-            document.querySelectorAll('.delete-prod').forEach(btn=>{ btn.onclick=()=>{ if(confirm('¿Eliminar?')){ const id=parseInt(btn.dataset.id); products=products.filter(p=>p.id!==id); saveProducts(); renderProductsGrid(currentFilter,currentSearch); updateAdminProductList(); showNotification('Producto eliminado'); } }; });
+            document.querySelectorAll('.edit-prod').forEach(btn=>{ btn.onclick=()=>{ const id=parseInt(btn.dataset.id); const prod=products.find(p=>p.id===id); if(prod){ document.getElementById('prod-id').value=prod.id; document.getElementById('prod-name').value=prod.name; document.getElementById('prod-category').value=prod.category; document.getElementById('prod-price').value=prod.price; document.getElementById('prod-desc').value=prod.desc; document.getElementById('prod-stock').value=prod.stock; document.getElementById('prod-rating').value=prod.rating; currentImageFiles = [...prod.images]; updateImagePreview(); updateProductPreview(); } }; });
+            document.querySelectorAll('.delete-prod').forEach(btn=>{ btn.onclick=()=>{ if(confirm('¿Eliminar este producto?')){ const id=parseInt(btn.dataset.id); products=products.filter(p=>p.id!==id); saveProducts(); renderProductsGrid(currentFilter,currentSearch); updateAdminProductList(); showNotification('Producto eliminado'); } }; });
         }
 
         function saveProductFromForm(){
@@ -758,16 +830,22 @@
             const desc = document.getElementById('prod-desc').value.trim();
             const stock = parseInt(document.getElementById('prod-stock').value);
             const rating = parseFloat(document.getElementById('prod-rating').value);
-            let images = currentImageFiles.length ? currentImageFiles : (id ? products.find(p=>p.id==id)?.images : ['data:image/svg+xml,%3Csvg%3E%3Crect width=100 height=100 fill=%23eee%3E%3C/rect%3E%3C/svg%3E']);
-            if(!name || isNaN(price)){ showNotification('Completa nombre y precio',true); return; }
+            
+            if(!name || !category || isNaN(price) || price <= 0){
+                showNotification('❌ Completa nombre, categoría y precio válido', true);
+                return;
+            }
+            
+            let images = currentImageFiles.length ? currentImageFiles : (id ? products.find(p=>p.id==id)?.images : ['data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" fill="%23cccccc"/%3E%3Ctext x="10" y="55" fill="black" font-size="12"%3EEDGECREW%3C/text%3E%3C/svg%3E']);
+            
             if(id){ // editar
                 const idx = products.findIndex(p=>p.id==id);
                 if(idx!==-1) products[idx] = { ...products[idx], name, category, price, desc, stock, rating, images };
-                showNotification('Producto actualizado');
+                showNotification('✅ Producto actualizado');
             } else { // nuevo
                 const newId = Date.now();
                 products.push({ id:newId, name, category, price, desc, stock, rating, images });
-                showNotification('Producto añadido');
+                showNotification('✅ Producto añadido correctamente');
             }
             saveProducts();
             renderProductsGrid(currentFilter,currentSearch);
@@ -775,31 +853,88 @@
             document.getElementById('reset-form-btn').click();
         }
 
+        // Previsualización en tiempo real
+        function updateProductPreview() {
+            const name = document.getElementById('prod-name').value || '(Sin nombre)';
+            const price = document.getElementById('prod-price').value || '0';
+            const category = document.getElementById('prod-category').value || 'accesorios';
+            const desc = document.getElementById('prod-desc').value || '(Sin descripción)';
+            const stock = document.getElementById('prod-stock').value || '0';
+            const rating = document.getElementById('prod-rating').value || '0';
+            const img = currentImageFiles.length ? currentImageFiles[0] : 'https://via.placeholder.com/200?text=Sin+imagen';
+            
+            const categoryEmoji = category === 'hombre' ? '👕' : category === 'mujer' ? '👗' : '🎒';
+            const stars = '⭐'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
+            
+            const previewDiv = document.getElementById('product-preview');
+            if(previewDiv) {
+                previewDiv.innerHTML = `
+                    <div style="text-align:center;">
+                        <img src="${img}" style="width:100%; max-height:150px; object-fit:contain; border-radius:8px; margin-bottom:1rem; background:#f5f5f5;">
+                        <h3 style="color:#000; margin:0.5rem 0;">${name}</h3>
+                        <p style="color:#666; font-size:0.9rem;"><strong>Categoría:</strong> ${categoryEmoji} ${category.toUpperCase()}</p>
+                        <p style="color:#000; font-size:1.3rem; font-weight:bold;">$${parseInt(price).toLocaleString() || '0'}</p>
+                        <p style="color:#666; font-size:0.85rem;">${desc.substring(0,100)}${desc.length > 100 ? '...' : ''}</p>
+                        <p><strong>Stock:</strong> ${stock} unidades</p>
+                        <p style="color:#f39c12;">${stars} (${rating}/5)</p>
+                    </div>
+                `;
+            }
+        }
+
         // -------- Eventos iniciales y filtros --------
         let currentFilter='all', currentSearch='';
         function filterAndRender(){ renderProductsGrid(currentFilter,currentSearch); }
+        
         loadProducts(); loadCart(); loadFavorites(); renderProductsGrid();
+        
+        // Eventos DOM
         document.getElementById('product-search').addEventListener('input',e=>{ currentSearch=e.target.value.toLowerCase(); filterAndRender(); });
         document.querySelectorAll('.filter-btn').forEach(btn=>{ btn.addEventListener('click',()=>{ document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentFilter=btn.dataset.category; filterAndRender(); }); });
         document.querySelector('.cart-icon').onclick=()=>{ document.querySelector('.cart-overlay').style.display='flex'; setTimeout(()=>document.querySelector('.cart-overlay').classList.add('active'),10); document.body.style.overflow='hidden'; };
         document.querySelector('.close-cart').onclick=()=>{ document.querySelector('.cart-overlay').classList.remove('active'); setTimeout(()=>{document.querySelector('.cart-overlay').style.display='none'; document.body.style.overflow='auto';},300); };
         document.querySelector('.cart-overlay').addEventListener('click',e=>{if(e.target===document.querySelector('.cart-overlay')) document.querySelector('.close-cart').click();});
         document.getElementById('cart-notes').addEventListener('input',e=>{ cartNotes=e.target.value; localStorage.setItem('cartNotes',cartNotes); });
-        document.getElementById('apply-discount').onclick=()=>{ const code=document.getElementById('discount-code').value.trim().toLowerCase(); if(code===VALID_CODE){ if(!discountApplied){ discountApplied=true; document.getElementById('discount-message').innerText='✅ 10% descuento activado'; renderCart(); showNotification('Código válido');} else{ document.getElementById('discount-message').innerText='Ya activado';} }else{ discountApplied=false; document.getElementById('discount-message').innerText='❌ Código inválido'; renderCart();} };
+        document.getElementById('apply-discount').onclick=()=>{ const code=document.getElementById('discount-code').value.trim().toLowerCase(); if(code===VALID_CODE){ if(!discountApplied){ discountApplied=true; document.getElementById('discount-message').innerText='✅ 20% descuento activado'; renderCart(); showNotification('Código válido - 20% OFF');} else{ document.getElementById('discount-message').innerText='Ya activado';} }else{ discountApplied=false; document.getElementById('discount-message').innerText='❌ Código inválido'; renderCart();} };
         document.getElementById('whatsapp-checkout').onclick=()=>{ if(cart.length===0){ showNotification('Carrito vacío',true); return; } const {subtotal,discount,total}=calculateTotals(); let msg='¡Hola! Quiero comprar:%0A'; cart.forEach(i=>msg+=`- ${i.name} x${i.quantity} = $${(i.price*i.quantity).toLocaleString()}%0A`); msg+=`%0ASubtotal: $${subtotal.toLocaleString()}%0A`; if(discountApplied && discount>0) msg+=`Descuento: -$${discount.toLocaleString()}%0A`; msg+=`Total: $${total.toLocaleString()}%0A`; if(cartNotes) msg+=`Notas: ${cartNotes}%0A`; msg+=`Mis datos:%0ANombre: %0ATeléfono: %0ADirección:`; window.open(`https://wa.me/573214583086?text=${encodeURIComponent(msg)}`,'_blank'); };
         document.querySelector('.close-modal').onclick=()=>{ document.getElementById('product-modal').classList.remove('active'); document.body.style.overflow='auto'; };
         document.getElementById('product-modal').addEventListener('click',e=>{if(e.target===document.getElementById('product-modal')){document.getElementById('product-modal').classList.remove('active'); document.body.style.overflow='auto';}});
         document.getElementById('modal-add-to-cart').onclick=()=>{ if(window.currentModalProduct) addToCart({id:window.currentModalProduct.id,name:window.currentModalProduct.name,price:window.currentModalProduct.price,image:window.currentModalProduct.images[0]},1); document.getElementById('product-modal').classList.remove('active'); document.body.style.overflow='auto'; };
+        
+        // Admin login
         const ADMIN_USER='admin', ADMIN_PASS='edgecrew123';
         const adminLoginModal=document.getElementById('admin-login-modal'), adminPanel=document.getElementById('admin-panel');
         document.getElementById('closeLoginBtn').onclick=()=>{ adminLoginModal.classList.remove('active'); document.body.style.overflow='auto'; };
         adminLoginModal.addEventListener('click',e=>{if(e.target===adminLoginModal){adminLoginModal.classList.remove('active'); document.body.style.overflow='auto';}});
-        document.getElementById('login-btn').onclick=()=>{ const user=document.getElementById('admin-user').value, pass=document.getElementById('admin-pass').value; if(user===ADMIN_USER && pass===ADMIN_PASS){ adminLoginModal.classList.remove('active'); adminPanel.classList.add('active'); updateAdminProductList(); document.getElementById('admin-user').value=''; document.getElementById('admin-pass').value=''; document.getElementById('login-error').style.display='none'; } else { document.getElementById('login-error').innerText='❌ Credenciales incorrectas'; document.getElementById('login-error').style.display='block'; } };
+        document.getElementById('login-btn').onclick=()=>{ const user=document.getElementById('admin-user').value, pass=document.getElementById('admin-pass').value; if(user===ADMIN_USER && pass===ADMIN_PASS){ adminLoginModal.classList.remove('active'); adminPanel.classList.add('active'); updateAdminProductList(); document.getElementById('admin-user').value=''; document.getElementById('admin-pass').value=''; document.getElementById('login-error').style.display='none'; } else { document.getElementById('login-error').innerText='❌ Usuario o contraseña incorrectos'; document.getElementById('login-error').style.display='block'; } };
         document.getElementById('admin-pass').addEventListener('keypress',e=>{ if(e.key==='Enter') document.getElementById('login-btn').click(); });
         document.getElementById('openAdminBtn').onclick=()=>{ adminLoginModal.classList.add('active'); document.body.style.overflow='hidden'; };
         document.getElementById('closeAdminBtn').onclick=()=>{ adminPanel.classList.remove('active'); document.body.style.overflow='auto'; };
         document.getElementById('save-product-btn').onclick=saveProductFromForm;
-        document.getElementById('reset-form-btn').onclick=()=>{ document.getElementById('prod-id').value=''; document.getElementById('prod-name').value=''; document.getElementById('prod-price').value=''; document.getElementById('prod-desc').value=''; document.getElementById('prod-stock').value='10'; document.getElementById('prod-rating').value='4.5'; currentImageFiles=[]; updateImagePreview(); };
+        document.getElementById('reset-form-btn').onclick=()=>{ 
+            if(confirm('¿Limpiar todos los campos? Se perderán los cambios no guardados.')){
+                document.getElementById('prod-id').value=''; 
+                document.getElementById('prod-name').value=''; 
+                document.getElementById('prod-category').value=''; 
+                document.getElementById('prod-price').value=''; 
+                document.getElementById('prod-desc').value=''; 
+                document.getElementById('prod-stock').value='10'; 
+                document.getElementById('prod-rating').value='4.5'; 
+                currentImageFiles = []; 
+                updateImagePreview(); 
+                updateProductPreview();
+                showNotification('Formulario limpiado');
+            }
+        };
+        
+        // Actualizar previsualización al escribir en los campos
+        document.getElementById('prod-name').addEventListener('input', updateProductPreview);
+        document.getElementById('prod-price').addEventListener('input', updateProductPreview);
+        document.getElementById('prod-category').addEventListener('change', updateProductPreview);
+        document.getElementById('prod-desc').addEventListener('input', updateProductPreview);
+        document.getElementById('prod-stock').addEventListener('input', updateProductPreview);
+        document.getElementById('prod-rating').addEventListener('input', updateProductPreview);
+        
         document.addEventListener('keydown',e=>{ if(e.key==='a' || e.key==='A'){ adminLoginModal.classList.add('active'); document.body.style.overflow='hidden'; } });
         const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.target.classList.add('visible')),{threshold:0.1});
         document.querySelectorAll('.scroll-reveal').forEach(el=>observer.observe(el));
